@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Champion Showdown</title>
+
+  <!-- Pure CSS Framework -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+
+  <!-- Google Font for Logo -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== VARIABLES ===== */
+    :root {
+      --color-primary: #1a0a2e;
+      --color-accent: #FFD700;
+      --color-purple: #a05cf5;
+      --color-text: #fff;
+      --color-text-light: rgba(255,255,255,0.86);
+      --color-gray-muted: #8e8e8e;
+      --color-button-dark: #1a0a22;
+      --color-button-hover: #721EDA;
+      --color-gold: #d6b934;
+      --font-logo: 'Orbitron', sans-serif;
+      --font-heading: "Georgia", "Times New Roman", serif;
+      --glow-gold: 0 0 10px rgba(255, 215, 0, 0.9), 0 0 20px rgba(255, 215, 0, 0.8), 0 0 35px rgba(255, 215, 0, 0.7);
+      --shadow-glow: 0 0 35px rgba(160, 92, 245, 0.5);
+      --gradient-primary: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #4a1a47 100%);
+      --gradient-dark: linear-gradient(180deg, rgba(10,6,20,0.95) 0%, rgba(10,6,20,0.98) 100%);
+    }
+
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--color-text);
+      background: var(--gradient-primary);
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    /* ===== PURE MENU CUSTOMIZATION ===== */
+    .pure-menu {
+      background-color: rgba(20,10,30,0.7);
+      box-shadow: var(--shadow-glow);
+      padding: 0;
+    }
+
+    .pure-menu-horizontal {
+      width: 100%;
+    }
+
+    .menu-container {
+      max-width: 100%;
+      padding: 10px 20px;
+    }
+
+    .pure-menu-heading {
+      font-family: var(--font-logo);
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--color-accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-shadow: var(--glow-gold);
+      padding: 0.5em 0;
+      float: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .pure-menu-list {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .pure-menu-item {
+      display: inline-block;
+    }
+
+    .pure-menu-link {
+      color: var(--color-text-light);
+      font-weight: 600;
+      transition: all 0.18s ease;
+      padding: 0.5em 1em;
+    }
+
+    .pure-menu-link:hover,
+    .pure-menu-link:focus {
+      background-color: transparent;
+      color: #ffd740;
+      transform: translateY(-2px);
+    }
+
+    .header-logo {
+      width: 70px;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    .nav-right {
+      float: right;
+      margin-top: 20px;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .content-wrapper {
+      padding: 50px 40px;
+      background: var(--gradient-dark);
+    }
+
+    .video-container {
+      margin-bottom: 30px;
+    }
+
+    .main-video {
+      width: 100%;
+      height: 500px;
+      border: 3px solid var(--color-purple);
+      border-radius: 14px;
+      box-shadow: var(--shadow-glow);
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar-box {
+      background: rgba(20,10,30,0.5);
+      padding: 30px 20px;
+      border-radius: 6px;
+      border: 3px solid rgba(255,255,255,0.04);
+    }
+
+    .toggle-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      color: var(--color-text);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color .3s ease;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .toggle-item:hover {
+      color: var(--color-accent);
+    }
+
+    .toggle-circle {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(160, 92, 245, 0.3);
+      border: 2px solid var(--color-purple);
+      flex-shrink: 0;
+    }
+
+    .toggle-item.active .toggle-circle {
+      background: var(--color-purple);
+      box-shadow: var(--shadow-glow);
+    }
+
+    /* ===== MATCHES SECTION ===== */
+    .matches-section {
+      padding: 48px 40px;
+      background: var(--gradient-primary);
+    }
+
+    .pure-box {
+      background: rgba(20,10,30,0.9);
+      padding: 40px;
+      border-radius: 14px;
+      border: 2px solid rgba(160, 92, 245, 0.2);
+    }
+
+    .section-title {
+      margin: 0 0 24px 0;
+      color: var(--color-text);
+      font-size: 30px;
+      font-family: var(--font-heading);
+    }
+
+    .matches-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .match-item {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+      transition: color .3s ease;
+    }
+
+    .match-item:hover {
+      color: var(--color-accent);
+    }
+
+    .match-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: #ccc;
+      font-weight: 400;
+      font-size: 16px;
+    }
+
+    .match-top span {
+      color: var(--color-gray-muted);
+      font-size: 13px;
+    }
+
+    .match-top img {
+      width: 24px;
+      height: 24px;
+      transition: transform .2s ease;
+    }
+
+    .match-top img:hover {
+      transform: scale(1.15);
+    }
+
+    .show-result-btn {
+      margin-top: 10px;
+      padding: 6px 12px;
+      background: #ff4444;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 12px;
+      transition: background 0.3s ease;
+    }
+
+    .show-result-btn:hover {
+      background: #ff2222;
+    }
+
+    .match-score {
+      margin-top: 10px;
+      padding: 8px;
+      background: #222;
+      border-left: 3px solid #ff4444;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 14px;
+      display: none;
+    }
+
+    /* ===== PRIZE POOL ===== */
+    .prize-pool {
+      background: #c6c6c6;
+      color: #000;
+      padding: 40px 30px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .prize-pool p {
+      margin: 8px 0;
+      font-size: 16px;
+    }
+
+    .prize-pool .title {
+      margin-top: 16px;
+      color: rgb(95, 8, 161);
+      font-weight: 900;
+      font-size: 20px;
+    }
+
+    /* ===== INFO SECTION ===== */
+    .info-section {
+      padding: 48px 40px;
+      background: var(--gradient-primary);
+      text-align: center;
+    }
+
+    .info-section h3 {
+      color: var(--color-accent);
+      margin: 30px 0 16px 0;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .info-section p {
+      color: var(--color-text-light);
+      margin: 0 auto 20px;
+      max-width: 900px;
+      line-height: 1.8;
+    }
+
+    .info-section ul {
+      margin: 0 auto 24px;
+      padding-left: 24px;
+      max-width: 900px;
+      text-align: left;
+      display: inline-block;
+      list-style-position: inside;
+    }
+
+    .info-section li {
+      color: var(--color-text-light);
+      margin-bottom: 12px;
+    }
+
+    .info-section strong {
+      color: var(--color-accent);
+      font-weight: 700;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer-text {
+      text-align: center;
+      color: var(--color-gold);
+      font-weight: 600;
+      font-size: 12px;
+      margin-top: 40px;
+      padding: 24px 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-logo {
+      font-family: var(--font-logo);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .pure-menu-heading {
+        font-size: 28px;
+        padding: 0.5em 0;
+      }
+
+      .header-logo {
+        width: 50px;
+      }
+
+      .nav-right {
+        float: none;
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .pure-menu-list {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .menu-container {
+        text-align: center;
+      }
+
+      .main-video {
+        height: 350px;
+      }
+
+      .content-wrapper,
+      .matches-section,
+      .info-section {
+        padding: 30px 20px;
+      }
+
+      .pure-box {
+        padding: 25px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .pure-menu-heading {
+        font-size: 24px;
+      }
+
+      .header-logo {
+        width: 40px;
+      }
+
+      .pure-menu-link {
+        padding: 0.5em 0.7em;
+        font-size: 14px;
+      }
+
+      .main-video {
+        height: 250px;
+      }
+
+      .match-top {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+      }
+
+      .content-wrapper,
+      .matches-section,
+      .info-section {
+        padding: 20px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Pure CSS Menu -->
+  <div class="pure-menu pure-menu-horizontal">
+    <div class="menu-container">
+      <a href="#" class="pure-menu-heading">
+        CS
+        <img src="https://i.pinimg.com/1200x/d0/de/5d/d0de5ddddd3e7c704511c912f1a60a63.jpg" alt="Logo" class="header-logo">
+      </a>
+      
+      <ul class="pure-menu-list nav-right">
+        <li class="pure-menu-item"><a href="Main.html" class="pure-menu-link">Home</a></li>
+        <li class="pure-menu-item"><a href="Match.html" class="pure-menu-link">Match</a></li>
+        <li class="pure-menu-item"><a href="New.html" class="pure-menu-link">News</a></li>
+        <li class="pure-menu-item"><a href="teams.html" class="pure-menu-link">Teams</a></li>
+        <li class="pure-menu-item"><a href="Players.html" class="pure-menu-link">Players</a></li>
+        <li class="pure-menu-item"><a href="watch.html" class="pure-menu-link">Watch/Vod</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content with Pure Grid -->
+  <div class="content-wrapper">
+    <div class="pure-g">
+      <!-- Video Section -->
+      <div class="pure-u-1 pure-u-lg-3-4">
+        <div class="video-container">
+          <iframe 
+            id="mainVideo"
+            class="main-video"
+            src="https://www.youtube.com/embed/URUli8Pv1Vc"
+            title="YouTube video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="pure-u-1 pure-u-lg-1-4">
+        <div class="sidebar-box">
+          <div class="toggle-item active" id="btn-ti">
+            <div class="toggle-circle"></div>
+            <span>TI 2025</span>
+          </div>
+          <div class="toggle-item" id="btn-blast">
+            <div class="toggle-circle"></div>
+            <span>Blast Slam#4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Matches Section -->
+  <div class="matches-section">
+    <div class="pure-g">
+      <!-- Matches Box -->
+      <div class="pure-u-1 pure-u-lg-2-3">
+        <div class="pure-box">
+          <h2 class="section-title">Matches</h2>
+          <ul class="matches-list" id="matchList">
+            <!-- Dynamic content will be inserted here -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Prize Pool -->
+      <div class="pure-u-1 pure-u-lg-1-3">
+        <div class="prize-pool">
+          <p>TI 2025: $2,834,633</p>
+          <p>Blast Slam#4: $1,000,000</p>
+          <p class="title">Prize Pool Event</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Section -->
+  <div class="info-section">
+    <h3>Types of Dota 2 Matches</h3>
+    <p>Esports players compete in Dota 2 in tournaments, while regular fans of the game get their taste of Dota 2 in regular matchmaking. There are few key differences between pro play and casual play. Regular players have many more ways to play Dota 2 available to them compared to the competitive environment, where the formats are heavily restricted.</p>
+
+    <h3>Formats of Users' Dota 2 Matches</h3>
+    <ul>
+      <li><strong>All Pick</strong> – where players are allowed to pick from all heroes.</li>
+      <li><strong>Turbo</strong> – a faster version of All Pick, where the gameplay is sped up, with increased gold and experience gain, shorter respawn times, and quicker item build-up.</li>
+      <li><strong>Ranked Matchmaking</strong> – where players ban some heroes, and are allowed to pick any available afterward. This is the main game mode for ranked Dota 2 matches.</li>
+      <li><strong>Captains Mode</strong> – where each time assigns a captain, who picks and bans heroes from the pool. This is the format used in most competitive Dota 2 tournaments.</li>
+      <li><strong>Single Draft</strong> – where players are choosing from three heroes, one with each main attribute.</li>
+    </ul>
+
+    <h3>Other modes include:</h3>
+    <ul>
+      <li><strong>Ability Draft</strong> - where every player has to create his own hero from the pool of existing abilities.</li>
+      <li><strong>All Random</strong> - Deathmatch, where the player's hero changes every time after their death.</li>
+      <li><strong>Arcade</strong> - Random games created by the community.</li>
+    </ul>
+
+    <h3>Formats of Competitive Matches</h3>
+    <ul>
+      <li><strong>Best-of-1</strong> – have to win one game, usually used in tournament group stages.</li>
+      <li><strong>Best-of-2</strong> – teams are playing two games regardless of the result of the first. Ties are possible. This is another format used in group stages, for example, on Majors and The International.</li>
+      <li><strong>Best-of-3</strong> – the first team which wins two games is declared a winner. Ties are impossible. Most of the time, this is a format of most playoff matches and DPC as well.</li>
+      <li><strong>Best-of-5</strong> – the most important matches are played until one team wins three games, with up to 5 maps played. This format is used in the biggest competitive tournament finals when the teams decide on the event's winner.</li>
+    </ul>
+
+    <div class="footer-text">
+      <span class="footer-logo">CS</span> &copy; 2025 Champion Showdown Esports
+    </div>
+  </div>
+
+  <script>
+    // ===== MATCH DATA =====
+    const matchData = {
+      ti: [
+        { teams: "Spirit vs XG", date: "Sept 4, 2025", video: "https://www.youtube.com/watch?v=1Zd41xE234o", icon: "https://game-tournaments.com/media/event/_30/e9333.png", score: "1 - 2" },
+        { teams: "Tundra vs Liquid", date: "Sept 7, 2025", video: "https://www.youtube.com/watch?v=f6U7uXMT20w", icon: "https://game-tournaments.com/media/event/_30/e9333.png", score: "2 - 1" },
+        { teams: "FLCN vs XG", date: "Sept 14, 2025", video: "https://www.youtube.com/watch?v=fmCO5YoQanw", icon: "https://game-tournaments.com/media/event/_30/e9333.png", score: "3 - 2" },
+        { teams: "Nigma vs TT", date: "Sept 12, 2025", video: "https://www.youtube.com/watch?v=CMYFhBt78aI", icon: "https://game-tournaments.com/media/event/_30/e9333.png", score: "2 - 0" },
+        { teams: "FLCN vs BB", date: "Sept 12, 2025", video: "https://www.youtube.com/watch?v=AkJr9L9kPug", icon: "https://game-tournaments.com/media/event/_30/e9333.png", score: "2 - 1" }
+      ],
+
+      blast: [
+        { teams: "Thundra vs FLCN", date: "Nov 9, 2025", video: "https://www.youtube.com/watch?v=xhfs_1aMdMQ", icon: "https://game-tournaments.com/media/event/_30/e9042.png", score: "3 - 2" },
+        { teams: "Aurora vs Heroic", date: "Oct 17, 2025", video: "https://www.youtube.com/watch?v=OB_TcAleVNo", icon: "https://game-tournaments.com/media/event/_30/e9042.png", score: "0 - 2" },
+        { teams: "BB vs Spirit", date: "Oct 19, 2025", video: "https://www.youtube.com/watch?v=OoWoH3G2zJc", icon: "https://game-tournaments.com/media/event/_30/e9042.png", score: "2 - 1" },
+        { teams: "Liquid vs YKBROS", date: "Oct 19, 2025", video: "https://www.youtube.com/watch?v=x6ZzZz_rzr8", icon: "https://game-tournaments.com/media/event/_30/e9042.png", score: "2 - 1" },
+        { teams: "BB vs EXE", date: "Oct 19, 2025", video: "https://www.youtube.com/watch?v=xC4fBAEoAEw", icon: "https://game-tournaments.com/media/event/_30/e9042.png", score: "2 - 0" }
+      ]
+    };
+
+    const matchList = document.getElementById("matchList");
+    const mainVideo = document.getElementById("mainVideo");
+    const btnTI = document.getElementById("btn-ti");
+    const btnBLAST = document.getElementById("btn-blast");
+
+    function updateMatches(type) {
+      matchList.innerHTML = "";
+
+      matchData[type].forEach(match => {
+        const li = document.createElement("li");
+        li.className = "match-item";
+
+        li.innerHTML = `
+          <div class="match-top">
+            <span style="flex: 1;">${match.teams}</span>
+            <span>${match.date}</span>
+            <img src="${match.icon}" alt="event icon">
+          </div>
+          <button class="show-result-btn">Show Result</button>
+          <div class="match-score">
+            Score: <strong>${match.score}</strong>
+          </div>
+        `;
+
+        // Click match to update video
+        li.querySelector(".match-top").addEventListener("click", () => {
+          const videoID = match.video.split("v=")[1];
+          mainVideo.src = `https://www.youtube.com/embed/${videoID}`;
+        });
+
+        // Click button to show result
+        li.querySelector(".show-result-btn").addEventListener("click", (e) => {
+          e.stopPropagation();
+          const scoreBox = li.querySelector(".match-score");
+          scoreBox.style.display = scoreBox.style.display === "none" ? "block" : "none";
+        });
+
+        matchList.appendChild(li);
+      });
+    }
+
+    function highlight(activeBtn) {
+      document.querySelectorAll(".toggle-item").forEach(btn => {
+        btn.classList.remove("active");
+      });
+      activeBtn.classList.add("active");
+    }
+
+    btnTI.addEventListener("click", () => {
+      updateMatches("ti");
+      highlight(btnTI);
+    });
+
+    btnBLAST.addEventListener("click", () => {
+      updateMatches("blast");
+      highlight(btnBLAST);
+    });
+
+    // Initialize with TI matches
+    updateMatches("ti");
+    highlight(btnTI);
+  </script>
+</body>
+</html>

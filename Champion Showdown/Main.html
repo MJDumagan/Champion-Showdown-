@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Champion Showdown</title>
+
+  <!-- Google Font for Logo -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== VARIABLES ===== */
+    :root {
+      /* Colors */
+      --color-primary: #1a0a2e;
+      --color-primary-dark: #080408;
+      --color-dark: #0b0310;
+      --color-accent: #FFD700;
+      --color-purple: #a05cf5;
+      --color-text: #fff;
+      --color-text-light: rgba(255,255,255,0.86);
+      --color-text-muted: #dcdcdc;
+      --color-gray-light: #c6c6c6;
+      --color-gray-dark: #332f35;
+      --color-gray-muted: #8e8e8e;
+      --color-button-dark: #1a0a22;
+      --color-button-hover: #721EDA;
+      --color-gold: #d6b934;
+
+      /* Spacing */
+      --spacing-xs: 6px;
+      --spacing-sm: 14px;
+      --spacing-md: 28px;
+      --spacing-lg: 48px;
+      --spacing-xl: 60px;
+
+      /* Typography */
+      --font-primary: Arial, sans-serif;
+      --font-logo: 'Orbitron', sans-serif;
+      --font-heading: "Georgia", "Times New Roman", serif;
+
+      /* Sizes */
+      --size-logo: 74px;
+      --size-logo-sm: 56px;
+      --size-logo-small: 90px;
+      --size-heading: 48px;
+      --size-heading-md: 36px;
+      --size-heading-sm: 26px;
+      --size-heading-lg: 42px;
+
+      /* Effects */
+      --shadow-text-large: 0 6px 28px rgba(0,0,0,0.65);
+      --shadow-text-small: 0 2px 8px rgba(0,0,0,0.6);
+      --shadow-glow: 0 0 35px rgba(160, 92, 245, 0.5);
+      --glow-gold: 0 0 10px rgba(255, 215, 0, 0.9), 0 0 20px rgba(255, 215, 0, 0.8), 0 0 35px rgba(255, 215, 0, 0.7);
+      --radius-small: 6px;
+      --radius-medium: 14px;
+      --radius-large: 12px;
+
+      --gradient-primary: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #4a1a47 100%);
+      --gradient-dark: linear-gradient(180deg, rgba(10,6,20,0.95) 0%, rgba(10,6,20,0.98) 100%);
+      --gradient-footer: linear-gradient(180deg, rgba(10,6,20,0.95) 0%, #4a1a47 100%);
+      --gradient-overlay: linear-gradient(90deg, rgba(5,5,10,0.65) 0%, rgba(5,5,10,0.4) 30%, rgba(5,5,10,0.25) 100%);
+    }
+
+    /* ===== RESET / BASE ===== */
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: var(--font-primary);
+      color: var(--color-text);
+      background: var(--color-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .container { min-height: 100vh; display:flex; flex-direction:column; }
+
+    /* ===== HEADER (supports both header and .hero-header) ===== */
+    header, .hero-header {
+      width: 100%;
+      position: relative;
+      background-color: rgba(20,10,30,0.7);
+      box-shadow: var(--shadow-glow);
+      z-index: 90;
+    }
+
+    /* Menu.html header fixed height */
+    header { height: 100px; display:flex; align-items:center; }
+
+    /* style home hero header with video */
+    .hero-header { height: 560px; overflow: hidden; }
+
+    /* header-top common */
+    .header-top {
+      position: absolute;
+      top: 18px;
+      left: 0;
+      right: 0;
+      z-index: 12;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 var(--spacing-lg);
+      box-sizing: border-box;
+    }
+
+    /* header-left */
+    .header-left { display:flex; align-items:center; gap:var(--spacing-sm); }
+
+    /* Logo image and text */
+    .dota2-logo {
+      width: var(--size-logo-small);
+      height: auto;
+      object-fit: contain;
+      border-radius: var(--radius-small);
+      display:block;
+    }
+    .text-logo {
+      font-family: var(--font-logo);
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--color-accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-shadow: var(--glow-gold);
+      user-select: none;
+    }
+
+    .sidebar-item {
+      padding: 8px;
+      border-left: 4px solid transparent;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .sidebar-item:hover {
+      border-left: 4px solid var(--color-purple);
+    }
+
+    .sidebar-item.active {
+      border-left: 4px solid var(--color-accent);
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* Navigation - supports <nav> and .top-nav */
+    nav, .top-nav {
+      display:flex;
+      gap:var(--spacing-md);
+      align-items:center;
+    }
+    nav a, .top-nav a {
+      color: var(--color-text-light);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      padding: var(--spacing-xs) 0;
+      transition: color .18s ease, transform .18s ease;
+    }
+    nav a:hover, .top-nav a:hover { color: #ffd740; transform: translateY(-2px); }
+
+    /* ===== HEADER RIGHT SECTION (Search Icon + Auth) ===== */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .search-icon-btn {
+      background: transparent;
+      border: none;
+      color: var(--color-accent);
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      border-radius: 50%;
+    }
+
+    .search-icon-btn:hover {
+      background: rgba(255,215,0,0.1);
+      transform: scale(1.1);
+    }
+
+    .search-icon {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-auth {
+      padding: 8px 18px;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 2px solid var(--color-accent);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-login {
+      background: transparent;
+      color: var(--color-accent);
+    }
+
+    .btn-login:hover {
+      background: var(--color-accent);
+      color: #000;
+      transform: translateY(-2px);
+    }
+
+    .btn-signup {
+      background: var(--color-accent);
+      color: #000;
+    }
+
+    .btn-signup:hover {
+      background: transparent;
+      color: var(--color-accent);
+      transform: translateY(-2px);
+    }
+
+    /* ===== SEARCH MODAL ===== */
+    .search-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 1001;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 100px;
+    }
+
+    .search-modal.active {
+      display: flex;
+    }
+
+    .search-modal-content {
+      width: 90%;
+      max-width: 600px;
+      position: relative;
+    }
+
+    .search-input-large {
+      width: 100%;
+      padding: 20px 60px 20px 20px;
+      font-size: 24px;
+      background: rgba(255,255,255,0.1);
+      border: 3px solid var(--color-accent);
+      border-radius: 50px;
+      color: var(--color-text);
+      outline: none;
+      box-shadow: 0 0 30px rgba(255,215,0,0.3);
+    }
+
+    .search-input-large::placeholder {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .search-close {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--color-accent);
+      font-size: 32px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .search-close:hover {
+      color: #ffed4e;
+    }
+
+    /* ===== AUTH MODALS ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 100%);
+      border-radius: 15px;
+      padding: 40px;
+      max-width: 450px;
+      width: 90%;
+      border: 2px solid var(--color-purple);
+      box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      color: var(--color-text);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.3s ease;
+    }
+
+    .modal-close:hover {
+      color: var(--color-accent);
+    }
+
+    .modal-title {
+      font-family: var(--font-logo);
+      font-size: 32px;
+      color: var(--color-accent);
+      text-shadow: var(--glow-gold);
+      margin: 0 0 25px 0;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      color: var(--color-text);
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+      font-size: 14px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.1);
+      color: var(--color-text);
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus {
+      border-color: var(--color-accent);
+      background: rgba(255,255,255,0.15);
+      outline: none;
+      box-shadow: 0 0 10px rgba(255,215,0,0.2);
+    }
+
+    .form-group input::placeholder {
+      color: rgba(255,255,255,0.4);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--color-accent);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+      background: #ffed4e;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(255,215,0,0.4);
+    }
+
+    .modal-footer {
+      text-align: center;
+      margin-top: 20px;
+      color: var(--color-text-light);
+      font-size: 14px;
+    }
+
+    .modal-footer a {
+      color: var(--color-accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .modal-footer a:hover {
+      color: #ffed4e;
+    }
+
+    /* ===== HERO VIDEO BACKGROUND ===== */
+    .welcome-video-container { position: absolute; inset: 0; z-index: 1; overflow: hidden; }
+    .hero-video { position: absolute; top:50%; left:50%; transform: translate(-50%,-50%); min-width:100%; min-height:100%; width:auto; height:auto; object-fit:cover; filter: brightness(0.35) saturate(0.95); pointer-events:none; }
+    .welcome-video-container::after { content:""; position:absolute; inset:0; z-index:2; background: var(--gradient-overlay); pointer-events:none; }
+    .welcome-text-overlay { position:absolute; z-index:6; left:64px; bottom:96px; max-width:760px; text-align:left; }
+    .welcome-text-overlay h1 { margin:0 0 8px 0; font-size: var(--size-heading); line-height:1.02; font-family: var(--font-heading); font-weight:700; text-shadow: var(--shadow-text-large); }
+    .welcome-text-overlay p { margin:0; color: var(--color-text-light); font-size:16px; text-shadow: var(--shadow-text-small); }
+
+    /* ===== LAYOUT ===== */
+    .content-wrapper { display:flex; gap:32px; padding:50px var(--spacing-xl); background: var(--gradient-dark); box-sizing: border-box; align-items:stretch; flex-wrap:wrap; flex-grow:1; }
+
+    .sidebar {
+      width:200px;
+      background: rgba(20,10,30,0.5);
+      padding:40px 16px;
+      border-radius: var(--radius-small);
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+      color: var(--color-text);
+      height:auto;
+      box-sizing:border-box;
+      border:3px solid rgba(255,255,255,0.04);
+    }
+
+    .main-content {
+      flex: 1 1 720px;
+      min-height: 300px;
+      border-radius: var(--radius-medium);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(10,10,10,0.9);
+      padding: 40px;
+      box-sizing:border-box;
+      color: var(--color-text);
+    }
+
+    .video-container { width:100%; max-width:1400px; aspect-ratio:16/9; border-radius: var(--radius-medium); overflow:hidden; border:3px solid var(--color-purple); box-shadow: var(--shadow-glow); background: rgba(20,10,30,0.7); }
+    .video-container iframe { width:100%; height:100%; border:0; display:block; }
+
+    .footer-text { display:flex; align-items:center; gap:var(--spacing-xs); color:var(--color-gold); font-weight:600; justify-content:center; font-size:12px; }
+    .footer-logo { font-family:var(--font-logo); font-weight:900; font-size:14px; }
+
+    hr.divider { border:0; border-top:1px solid rgba(255,255,255,0.06); width:100%; margin:0; }
+
+    .bottom-section { 
+      width:100%; 
+      padding:48px var(--spacing-lg); 
+      box-sizing:border-box; 
+      background: var(--gradient-footer); 
+      color: var(--color-text); 
+      display:flex; 
+      flex-direction: column;
+      align-items:center;
+      gap:24px;
+      text-align:center; 
+    }
+    .bottom-section > p { 
+      margin:0; 
+      font-size:16px; 
+      line-height:1.6; 
+      max-width:900px; 
+      color: var(--color-text-muted); 
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width:1200px) {
+      .content-wrapper { flex-direction:column; padding:40px var(--spacing-md); align-items:stretch; }
+      .sidebar { width:100%; padding:24px 16px; border:none; }
+      .main-content { min-height:400px; }
+    }
+    @media (max-width:768px) {
+      header { height:80px; }
+      .text-logo { font-size:32px; }
+      .dota2-logo { width:56px; }
+      nav, .top-nav { gap:var(--spacing-sm); }
+      nav a, .top-nav a { font-size:14px; }
+      .header-top { padding:0 var(--spacing-md); }
+      .content-wrapper { padding:30px var(--spacing-md); }
+      .main-content { min-height:250px; padding:20px; }
+      .bottom-section { padding:30px var(--spacing-md); }
+      .welcome-text-overlay { left:36px; bottom:80px; max-width:560px; }
+      .welcome-text-overlay h1 { font-size: var(--size-heading-md); }
+      .header-right { flex-wrap: wrap; }
+    }
+    @media (max-width:480px) {
+      .hero-header { height:420px; }
+      .header-top { padding:0 var(--spacing-sm); flex-wrap:wrap; }
+      nav, .top-nav { width:100%; flex-direction:column; gap:8px; margin-top:8px; }
+      .dota2-logo { width:40px; }
+      .text-logo { font-size:24px; }
+      .content-wrapper { padding:20px var(--spacing-sm); }
+      .main-content { min-height:200px; }
+      .bottom-section { padding:20px var(--spacing-sm); }
+      .welcome-text-overlay { left:20px; bottom:50px; max-width:calc(100% - 40px); }
+      .welcome-text-overlay h1 { font-size: var(--size-heading-sm); }
+      .btn-auth { padding: 6px 14px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- ===== HEADER SECTION ===== -->
+    <header class="hero-header">
+      <div class="header-top">
+        <div class="header-left">
+          <div class="text-logo">CS</div>
+          <img src="https://i.pinimg.com/1200x/d0/de/5d/d0de5ddddd3e7c704511c912f1a60a63.jpg" alt="Dota 2 Logo" class="dota2-logo">
+        </div>
+
+        <nav class="top-nav">
+          <a href="Main.html">Home</a>
+          <a href="Match.html">Match</a>
+          <a href="New.html">News</a>
+          <a href="teams.html">Teams</a>
+          <a href="Players.html">Players</a>
+          <a href="watch.html">Watch/Vod</a>
+        </nav>
+
+        <div class="header-right">
+          <button class="search-icon-btn" onclick="openSearchModal()">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+          </button>
+
+          <div class="auth-buttons">
+            <button class="btn-auth btn-login" onclick="openLoginModal()">Log In</button>
+            <button class="btn-auth btn-signup" onclick="openSignupModal()">Sign Up</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="welcome-video-container">
+        <video class="hero-video" autoplay muted loop playsinline preload="auto">
+          <source src="https://cdn.steamstatic.com/apps/dota2/videos/dota_react/homepage/dota_montage_webm.webm" type="video/webm">
+          <source src="https://cdn.steamstatic.com/apps/dota2/videos/dota_react/homepage/dota_montage_02.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <div class="welcome-text-overlay">
+          <h1>Welcome To Champion Showdown</h1>
+          <p>Your home for Highlight esports matches, team stats, and exciting Dota 2 content.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="content-wrapper">
+      <aside class="sidebar">
+        <div class="sidebar-item active">
+          BLAST Slam#4
+        </div>
+        <div class="sidebar-item">
+          TI 2025
+        </div>
+      </aside>
+
+      <section class="main-content">
+        <div class="video-container">
+          <iframe 
+            src="https://www.youtube.com/embed/xhfs_1aMdMQ"
+            title="YouTube video player" 
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+      </section>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- ===== BOTTOM SECTION ===== -->
+    <section class="bottom-section">
+      <p>
+        Stream and video, teams and players, statistics and analytics<br>
+        On Esports Champion Showdown you can find all Dota 2 matches, watch streams and videos, look for 
+        detailed statistics on the teams, players and games. Follow Esports with Esports Champion Showdown
+      </p>
+
+      <div class="footer-text">
+        <div class="footer-logo">CS</div> &copy; 2025 Champion Showdown Esports
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Search Modal -->
+  <div id="searchModal" class="search-modal">
+    <div class="search-modal-content">
+      <input type="text" class="search-input-large" placeholder="Search..." id="searchInput" autofocus>
+      <button class="search-close" onclick="closeSearchModal()">&times;</button>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeLoginModal()">&times;</button>
+      <h2 class="modal-title">Log In</h2>
+      
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="Enter your email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password" required>
+        </div>
+        
+        <button type="submit" class="btn-submit">Log In</button>
+      </form>
+      
+      <div class="modal-footer">
+        Don't have an account? <a onclick="switchToSignup()">Sign Up</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div id="signupModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeSignupModal()">&times;</button>
+      <h2 class="modal-title">Sign Up</h2>
+      
+      <form onsubmit="handleSignup(event)">
+        <div class="form-group">
+          <label for="signupUsername">Username</label>
+          <input type="text" id="signupUsername" placeholder="Choose a username" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" placeholder="Enter your email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" placeholder="Create a password" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="signupConfirmPassword">Confirm Password</label>
+          <input type="password" id="signupConfirmPassword" placeholder="Confirm your password" required>
+        </div>
+        
+        <button type="submit" class="btn-submit">Sign Up</button>
+      </form>
+      
+      <div class="modal-footer">
+        Already have an account? <a onclick="switchToLogin()">Log In</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Video switching functionality
+    const videoList = [
+      "https://www.youtube.com/embed/xhfs_1aMdMQ", // BLAST Slam IV
+      "https://www.youtube.com/embed/ZpZtFBeFzl8"  // TI 2025
+    ];
+
+    const sidebarItems = document.querySelectorAll(".sidebar-item");
+    const iframe = document.querySelector(".video-container iframe");
+    
+    sidebarItems.forEach((item, index) => {
+      item.addEventListener("click", () => {
+        sidebarItems.forEach(i => i.classList.remove("active"));
+        item.classList.add("active");
+        iframe.src = videoList[index];
+      });
+    });
+
+    // Search Modal
+    function openSearchModal() {
+      document.getElementById('searchModal').classList.add('active');
+      document.getElementById('searchInput').focus();
+    }
+
+    function closeSearchModal() {
+      document.getElementById('searchModal').classList.remove('active');
+      document.getElementById('searchInput').value = '';
+    }
+
+    // User Authentication System
+    let currentUser = null;
+
+    // Check if user is logged in on page load
+    window.addEventListener('DOMContentLoaded', function() {
+      const savedUser = localStorage.getItem('currentUser');
+      if (savedUser) {
+        currentUser = JSON.parse(savedUser);
+        updateUIForLoggedInUser();
+      }
+    });
+
+    function updateUIForLoggedInUser() {
+      const authButtons = document.querySelector('.auth-buttons');
+      authButtons.innerHTML = `
+        <span style="color: var(--color-text-light); margin-right: 10px;">
+          Welcome, ${currentUser.username}!
+        </span>
+        <button class="btn-auth btn-login" onclick="handleLogout()">Log Out</button>
+      `;
+    }
+
+    function handleLogout() {
+      if (confirm('Are you sure you want to log out?')) {
+        currentUser = null;
+        localStorage.removeItem('currentUser');
+        location.reload();
+      }
+    }
+
+    // Login Modal
+    function openLoginModal() {
+      document.getElementById('loginModal').classList.add('active');
+    }
+
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.remove('active');
+      document.getElementById('loginEmail').value = '';
+      document.getElementById('loginPassword').value = '';
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      // Get registered users from localStorage
+      const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+      
+      // Find user with matching email
+      const user = users.find(u => u.email === email);
+      
+      if (!user) {
+        alert('No account found with this email. Please sign up first.');
+        return;
+      }
+      
+      if (user.password !== password) {
+        alert('Incorrect password. Please try again.');
+        return;
+      }
+      
+      // Login successful
+      currentUser = {
+        username: user.username,
+        email: user.email
+      };
+      
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      
+      alert(`Welcome back, ${user.username}!`);
+      closeLoginModal();
+      updateUIForLoggedInUser();
+    }
+
+    // Signup Modal
+    function openSignupModal() {
+      document.getElementById('signupModal').classList.add('active');
+    }
+
+    function closeSignupModal() {
+      document.getElementById('signupModal').classList.remove('active');
+      document.getElementById('signupUsername').value = '';
+      document.getElementById('signupEmail').value = '';
+      document.getElementById('signupPassword').value = '';
+      document.getElementById('signupConfirmPassword').value = '';
+    }
+
+    function handleSignup(event) {
+      event.preventDefault();
+      const username = document.getElementById('signupUsername').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+      const confirmPassword = document.getElementById('signupConfirmPassword').value;
+      
+      // Validation
+      if (username.length < 3) {
+        alert('Username must be at least 3 characters long.');
+        return;
+      }
+      
+      if (password.length < 6) {
+        alert('Password must be at least 6 characters long.');
+        return;
+      }
+      
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+      }
+      
+      // Check if email already exists
+      const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+      const existingUser = users.find(u => u.email === email);
+      
+      if (existingUser) {
+        alert('An account with this email already exists. Please log in.');
+        return;
+      }
+      
+      // Create new user
+      const newUser = {
+        username: username,
+        email: email,
+        password: password,
+        createdAt: new Date().toISOString()
+      };
+      
+      users.push(newUser);
+      localStorage.setItem('registeredUsers', JSON.stringify(users));
+      
+      // Auto-login after signup
+      currentUser = {
+        username: newUser.username,
+        email: newUser.email
+      };
+      
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      
+      alert(`Account created successfully! Welcome, ${username}!`);
+      closeSignupModal();
+      updateUIForLoggedInUser();
+    }
+
+    // Switch between modals
+    function switchToSignup() {
+      closeLoginModal();
+      openSignupModal();
+    }
+
+    function switchToLogin() {
+      closeSignupModal();
+      openLoginModal();
+    }
+
+    // Close modals when clicking outside
+    document.getElementById('searchModal').addEventListener('click', function(e) {
+      if (e.target === this) closeSearchModal();
+    });
+
+    document.getElementById('loginModal').addEventListener('click', function(e) {
+      if (e.target === this) closeLoginModal();
+    });
+
+    document.getElementById('signupModal').addEventListener('click', function(e) {
+      if (e.target === this) closeSignupModal();
+    });
+  </script>
+</body>
+</html>

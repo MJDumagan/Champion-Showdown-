@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dota 2 - News & Updates</title>
+  
+  <!-- Pure CSS Framework -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+  
+  <style>
+/* ===== CUSTOM THEME ON TOP OF PURE CSS ===== */
+:root {
+  --color-primary: #1a0a2e;
+  --color-accent: #FFD700;
+  --color-purple: #a05cf5;
+  --color-text: #fff;
+  --color-text-light: rgba(255,255,255,0.86);
+  --color-gray-muted: #8e8e8e;
+  --color-burgundy: #6b0f1a;
+  --font-logo: 'Orbitron', sans-serif;
+  --font-heading: "Georgia", "Times New Roman", serif;
+  --glow-gold: 0 0 10px rgba(255, 215, 0, 0.9), 0 0 20px rgba(255, 215, 0, 0.8), 0 0 35px rgba(255, 215, 0, 0.7);
+  --shadow-glow: 0 0 35px rgba(160, 92, 245, 0.5);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: Arial, sans-serif;
+  color: var(--color-text);
+  background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #4a1a47 100%);
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* ===== PURE MENU CUSTOMIZATION ===== */
+.pure-menu {
+  background-color: rgba(20,10,30,0.7);
+  box-shadow: var(--shadow-glow);
+  padding: 0;
+}
+
+.pure-menu-horizontal {
+  width: 100%;
+}
+
+.menu-container {
+  max-width: 100%;
+  padding: 10px 20px;
+}
+
+.pure-menu-heading {
+  font-family: var(--font-logo);
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--color-accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: var(--glow-gold);
+  padding: 0.5em 0;
+  float: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pure-menu-list {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pure-menu-item {
+  display: inline-block;
+}
+
+.pure-menu-link {
+  color: var(--color-text-light);
+  font-weight: 600;
+  transition: all 0.18s ease;
+  padding: 0.5em 1em;
+}
+
+.pure-menu-link:hover,
+.pure-menu-link:focus {
+  background-color: transparent;
+  color: #ffd740;
+  transform: translateY(-2px);
+}
+
+.header-logo {
+  width: 70px;
+  height: auto;
+  border-radius: 6px;
+}
+
+.nav-right {
+  float: right;
+  margin-top: 20px;
+}
+
+/* ===== CONTENT AREA ===== */
+.content-wrapper {
+  background: linear-gradient(180deg, rgba(10,6,20,0.95) 0%, rgba(10,6,20,0.98) 100%);
+  min-height: calc(100vh - 100px);
+  padding: 40px 20px;
+}
+
+.news-header {
+  color: var(--color-text);
+  font-size: 36px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-shadow: 0 6px 28px rgba(0,0,0,0.65);
+  border-bottom: 3px solid var(--color-accent);
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+}
+
+/* ===== PURE CARD CUSTOMIZATION ===== */
+.news-card {
+  background: rgba(255, 255, 255, 0.959);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.news-card:hover {
+  transform: translateX(10px);
+  border-color: var(--color-accent);
+  box-shadow: 0 8px 30px rgba(255,215,0,0.2);
+}
+
+.news-thumbnail {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.news-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.news-date {
+  color: var(--color-gray-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pure-badge {
+  background: var(--color-accent);
+  color: var(--color-burgundy);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.news-title {
+  color: #000;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  line-height: 1.4;
+  font-family: var(--font-heading);
+}
+
+.news-excerpt {
+  color: #333;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ===== ARTICLE VIEW ===== */
+.article-view {
+  display: none;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.article-view.active {
+  display: block;
+}
+
+.pure-button-back {
+  background: transparent;
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+.pure-button-back:hover {
+  background: var(--color-accent);
+  color: var(--color-burgundy);
+  transform: translateX(-5px);
+}
+
+.article-header-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+
+.article-title {
+  color: var(--color-text);
+  font-size: 36px;
+  font-weight: 700;
+  margin: 20px 0;
+  line-height: 1.2;
+  font-family: var(--font-heading);
+  text-shadow: 0 6px 28px rgba(0,0,0,0.65);
+}
+
+.article-content {
+  color: var(--color-text-light);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.article-content p {
+  margin: 0 0 20px 0;
+}
+
+.article-content h3 {
+  color: var(--color-accent);
+  font-size: 24px;
+  margin: 30px 0 15px 0;
+}
+
+.article-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  margin: 30px 0;
+}
+
+.article-content li {
+  margin-bottom: 10px;
+  color: var(--color-text-light);
+}
+
+.video-thumbnail-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.video-thumbnail-wrapper img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.video-thumbnail-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.video-thumbnail-wrapper:hover .video-overlay {
+  opacity: 1;
+}
+
+.video-overlay img {
+  width: 60px;
+  height: 60px;
+}
+
+/* ===== FOOTER ===== */
+.footer-text {
+  text-align: center;
+  color: #d6b934;
+  font-weight: 600;
+  font-size: 12px;
+  margin-top: 40px;
+  padding: 24px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-logo {
+  font-family: var(--font-logo);
+  font-weight: 900;
+  font-size: 14px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .pure-menu-heading {
+    font-size: 28px;
+    padding: 0.5em 0;
+  }
+  
+  .header-logo {
+    width: 50px;
+  }
+  
+  .nav-right {
+    float: none;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .pure-menu-list {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .menu-container {
+    text-align: center;
+  }
+  
+  .news-header {
+    font-size: 28px;
+  }
+  
+  .article-title {
+    font-size: 28px;
+  }
+  
+  .article-header-img {
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pure-menu-heading {
+    font-size: 24px;
+  }
+  
+  .header-logo {
+    width: 40px;
+  }
+  
+  .pure-menu-link {
+    padding: 0.5em 0.7em;
+    font-size: 14px;
+  }
+  
+  .news-header {
+    font-size: 24px;
+  }
+  
+  .article-header-img {
+    height: 200px;
+  }
+}
+  </style>
+</head>
+<body>
+  <!-- Pure CSS Menu (Horizontal) -->
+  <div class="pure-menu pure-menu-horizontal">
+    <div class="menu-container">
+      <a href="#" class="pure-menu-heading">
+        CS
+        <img src="https://i.pinimg.com/1200x/d0/de/5d/d0de5ddddd3e7c704511c912f1a60a63.jpg" alt="Logo" class="header-logo">
+      </a>
+      
+      <ul class="pure-menu-list nav-right">
+        <li class="pure-menu-item"><a href="Main.html" class="pure-menu-link">Home</a></li>
+        <li class="pure-menu-item"><a href="Match.html" class="pure-menu-link">Match</a></li>
+        <li class="pure-menu-item"><a href="New.html" class="pure-menu-link">News</a></li>
+        <li class="pure-menu-item"><a href="teams.html" class="pure-menu-link">Teams</a></li>
+        <li class="pure-menu-item"><a href="Players.html" class="pure-menu-link">Players</a></li>
+        <li class="pure-menu-item"><a href="watch.html" class="pure-menu-link">Watch/Vod</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content-wrapper">
+    <div class="pure-g">
+      <div class="pure-u-1">
+        <!-- News List View -->
+        <div id="newsListView">
+          <h1 class="news-header">Latest News</h1>
+          
+          <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-1 news-list">
+              <!-- News items will be dynamically generated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Article View -->
+        <div id="articleView" class="article-view">
+          <!-- Article content will be dynamically generated -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-text">
+    <span class="footer-logo">CS</span> &copy; 2025 Champion Showdown Esports
+  </div>
+
+  <script>
+    const newsData = [
+      {
+        id: 1,
+        title: "Quinn announces retirement",
+        thumbnail: "https://escorenews.com/media/news/n71374.webp",
+        date: "Dota 2 September 16",
+        category: "Announcement",
+        excerpt: "Professional player announces retirement after legendary career. The community reflects on incredible achievements and memorable moments.",
+        fullContent: `
+          <p>Quinn "Quinn" Callahan announced the end of his playing career. He shared the news on social media, addressing the fans in a 10-minute video.</p>
+          
+          <p>Callahan is planning to move to talent work instead. In addition to that, he wants to return to streaming and creating guides about the game. Quinn prefers to talk more about his achievements on other occasions.</p>
+          
+          <a href="https://www.youtube.com/watch?v=w8QkPQwzUK0" target="_blank" class="video-thumbnail-wrapper">
+            <img src="https://img.youtube.com/vi/w8QkPQwzUK0/maxresdefault.jpg" alt="YouTube Video">
+            <div class="video-overlay">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube Logo">
+            </div>
+          </a>
+
+          <p>During his almost 10 years long career, Quinn played for teams like OG™️ Gaming, Quincy Crew, Newbee. He found biggest success after leaving North America and joining Gaimin Gladiators in 2022. The team dominated some of the seasons, winning multiple Majors in 2023.</p>          
+          <p>Before The International 2025, Quinn and his team got into a controversy. The players accused Quinn of toxic behavior.</p>
+        `
+      },
+      {
+        id: 2,
+        title: "Dimasik hinted to me that Larl would not be in Spirit",
+        thumbnail: "https://escorenews.com/media/news/n72023.webp",
+        date: "Dota 2 September 17",
+        category: "Drama",
+        excerpt: "Dimasik hinted to me that Larl would not be in Spirit",
+        fullContent: `
+          <p>Kerry PARIVISION Alan «Satanic» Gallyamov he spoke about a possible decision in the lineup Team Spirit by Dota 2. He heard that he would leave the team Denis «Larl» Sigitov.</p>
+          
+          <img src="https://escorenews.com/media/news/pic-20250916-1600x898-2333334437.jpeg">
+          
+          <p>It is unknown which one «Dimasik» provided information to Gallyamov. Perhaps it was the Spirit manager Dmitry «Korb3n» Belov or Dmitry «DM» Dorokhin.</p>
+          
+          <p>Spirit has not yet officially announced any lineup changes. After The International 2025 Yaroslav «Miposhka» Naydenov reported, which will definitely take an indefinite break.</p>
+        `
+      },
+      {
+        id: 3,
+        title: "Best and worst heroes by winrate at The International 2025",
+        thumbnail: "https://escorenews.com/media/news/n71984.webp",
+        date: "Dota 2 September 15",
+        category: "Analysis",
+        excerpt: "The losers and winners of TI14. Complete meta analysis reveals surprising statistics and dominant strategies from the tournament.",
+        fullContent: `
+          <p>The International 2025 has concluded with Team Falcons' victory over Xtreme Gaming. As always, the most popular heroes are probably already invading pubs at every skill level.</p>
+          
+          <h3>Top 10 best heroes by winrate at The International 2025</h3>
+          <p>Elder Titan was the actual silent winner of TI14. Picked only 10 times, this character ended up winning 8 of the matches.</p>
+          
+          <img src="https://escorenews.com/media/news/pic-20250915-1238x488-1674859712.png">
+          
+          <h3>Worst 10 heroes by winrate at TI14</h3>
+          <p>Timbersaw should be called the anti-hero of TI14. He lost all 9 games when he was picked.</p>
+          
+          <img src="https://escorenews.com/media/news/pic-20250915-1243x490-3734946188.png">
+
+          <h3>Top 10 most picked heroes of The International 2025</h3>
+          <p>Disruptor leads the chart of the most popular characters at TI14, picked 53 times.</p>
+          
+          <img src="https://escorenews.com/media/news/pic-20250915-1243x490-3734946188.png">
+        `
+      },
+      {
+        id: 4,
+        title: "Dota 2 post-TI14 reshuffle: leaks, rumors, transfer moves",
+        thumbnail: "https://escorenews.com/media/news/n71940.webp",
+        date: "Dota 2 September 14",
+        category: "Transfers",
+        excerpt: "It is time for another reshuffle! Major roster changes expected as teams rebuild for the upcoming competitive season.",
+        fullContent: `
+          <p>As The International 2025 comes to its conclusion, the scene is getting ready for another massive reshuffle.</p>
+          
+          <h3>Western Europe reshuffle in Dota 2</h3>
+          <h2>Tundra Esports</h2>
+          <li>Official: Ari joins the team.</li>
+          <li>Official: Saksa to take a break, goes inactive.</li>
+          <li>OFFSTAGE: Saksa will join Team Falcons.</li>
+          
+          <h2>Team Liquid</h2>        
+          <li>Official: SabeRLight- is out.</li>
+          <li>Lilskrip: iNSaNiA will leave Liquid.</li>
+
+          <h2>Team Secret</h2>
+          <li>Official: YapzOr is out.</li>
+          <li>Pulse's Mind: YapzOr is out, KheZu is in.</li>  
+
+          <h3>Changes in Eastern Europe Dota 2 teams</h3>
+          
+          <img src="https://escorenews.com/media/news/pic-20250914-2048x1366-6264320464.jpeg">
+          
+          <h2>Team Spirit</h2>
+          <li>Official: Miposhka to take a break.</li>
+          <li>Pulse's Mind: Miposhka is taking a break, Larl is out.</li>
+        `
+      }
+    ];
+
+    const newsList = document.querySelector('.news-list');
+    const newsListView = document.getElementById('newsListView');
+    const articleView = document.getElementById('articleView');
+
+    // Generate news items using Pure CSS Grid
+    newsData.forEach(item => {
+      const cardWrapper = document.createElement('div');
+      cardWrapper.className = 'pure-u-1 pure-u-md-1-1';
+      
+      const card = document.createElement('div');
+      card.className = 'news-card';
+      card.dataset.id = item.id;
+
+      card.innerHTML = `
+        <div class="pure-g">
+          <div class="pure-u-1 pure-u-md-1-4">
+            <img src="${item.thumbnail}" alt="${item.title}" class="news-thumbnail">
+          </div>
+          <div class="pure-u-1 pure-u-md-3-4" style="padding: 20px 25px;">
+            <div class="news-meta">
+              <span class="news-date">${item.date}</span>
+              <span class="pure-badge">${item.category}</span>
+            </div>
+            <h2 class="news-title">${item.title}</h2>
+            <p class="news-excerpt">${item.excerpt}</p>
+          </div>
+        </div>
+      `;
+
+      card.addEventListener('click', () => openArticle(item.id));
+      cardWrapper.appendChild(card);
+      newsList.appendChild(cardWrapper);
+    });
+
+    function openArticle(id) {
+      const article = newsData.find(item => item.id === id);
+      if (!article) return;
+
+      articleView.innerHTML = `
+        <button class="pure-button pure-button-back" onclick="closeArticle()">← Back to News</button>
+        <span class="pure-badge">${article.category}</span>
+        <h1 class="article-title">${article.title}</h1>
+        <img src="${article.thumbnail}" alt="${article.title}" class="article-header-img">
+        <div class="article-content">
+          ${article.fullContent}
+        </div>
+      `;
+
+      newsListView.style.display = 'none';
+      articleView.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeArticle() {
+      articleView.classList.remove('active');
+      newsListView.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

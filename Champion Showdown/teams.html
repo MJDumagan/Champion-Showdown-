@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teams Ranking</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+  <style>
+/* ===== VARIABLES ===== */
+:root {
+  --color-primary: #1a0a2e;
+  --color-primary-dark: #080408;
+  --color-dark: #0b0310;
+  --color-accent: #FFD700;
+  --color-purple: #a05cf5;
+  --color-text: #fff;
+  --color-text-light: rgba(255,255,255,0.86);
+  --color-text-muted: #dcdcdc;
+  --color-gray-light: #c6c6c6;
+  --color-gray-dark: #332f35;
+  --color-gray-muted: #8e8e8e;
+  --color-red-dark: #420b15;
+  --color-button-dark: #1a0a22;
+  --color-button-hover: #721EDA;
+  --color-gold: #d6b934;
+  --color-burgundy: #6b0f1a;
+
+  --spacing-xs: 6px;
+  --spacing-sm: 14px;
+  --spacing-md: 28px;
+  --spacing-lg: 48px;
+  --spacing-xl: 60px;
+
+  --font-primary: Arial, sans-serif;
+  --font-logo: 'Orbitron', sans-serif;
+  --font-heading: "Georgia", "Times New Roman", serif;
+
+  --shadow-text-large: 0 6px 28px rgba(0,0,0,0.65);
+  --shadow-text-small: 0 2px 8px rgba(0,0,0,0.6);
+  --shadow-glow: 0 0 35px rgba(160, 92, 245, 0.5);
+  --glow-gold: 0 0 10px rgba(255, 215, 0, 0.9), 0 0 20px rgba(255, 215, 0, 0.8), 0 0 35px rgba(255, 215, 0, 0.7);
+  --radius-small: 6px;
+  --radius-medium: 14px;
+  --radius-large: 12px;
+
+  --gradient-dark: linear-gradient(180deg, rgba(10,6,20,0.95) 0%, rgba(10,6,20,0.98) 100%);
+  --gradient-footer: linear-gradient(135deg,#1a0a2e 0%,#2d1b4e 50%,#4a1a47 100%);
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: var(--font-primary);
+  color: var(--color-text);
+  background: var(--color-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container { 
+  min-height: 100vh; 
+  display: flex; 
+  flex-direction: column; 
+}
+
+/* ===== HEADER ===== */
+header {
+  width: 100%;
+  height: 100px;
+  position: relative;
+  background-color: rgba(20,10,30,0.7);
+  box-shadow: var(--shadow-glow);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+}
+
+.header-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 12;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--spacing-lg);
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.header-left { 
+  display: flex; 
+  align-items: center; 
+  gap: var(--spacing-sm); 
+}
+
+.dota2-logo {
+  width: 90px;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-small);
+  display: block;
+}
+
+.text-logo {
+  font-family: var(--font-logo);
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--color-accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: var(--glow-gold);
+  user-select: none;
+}
+
+nav {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+nav a {
+  color: var(--color-text-light);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 6px 8px;
+  transition: color .18s ease, transform .18s ease;
+}
+
+nav a:hover { 
+  color: #ffd740; 
+  transform: translateY(-2px); 
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+  flex: 1;
+  background: var(--gradient-dark);
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Teams List View */
+.teams-list-view {
+  width: 100%;
+  max-width: 600px;
+}
+
+.teams-container {
+  width: 100%;
+  background: #e8f0e8;
+  border-radius: var(--radius-medium);
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.teams-header {
+  text-align: right;
+  margin-bottom: 30px;
+}
+
+.teams-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.teams-table {
+  width: 100%;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 80px 1fr 120px;
+  gap: 20px;
+  padding: 15px 0;
+  border-bottom: 2px solid #000;
+  margin-bottom: 15px;
+}
+
+.table-header-cell {
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  text-transform: capitalize;
+}
+
+.team-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 120px;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  align-items: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.team-row:hover {
+  background: rgba(0,0,0,0.05);
+  transform: translateX(5px);
+}
+
+.team-place {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+}
+
+.team-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.team-flag {
+  width: 28px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.team-tag {
+  font-weight: 700;
+  color: #000;
+  font-size: 14px;
+  margin-right: 8px;
+}
+
+.team-name {
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.team-earned {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  text-align: right;
+}
+
+/* Team Profile View */
+.team-profile-view {
+  display: none;
+  width: 100%;
+  max-width: 800px;
+}
+
+.team-profile-view.active {
+  display: block;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-accent);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 30px;
+  padding: 10px;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.back-button:hover {
+  transform: translateX(-5px);
+}
+
+.back-button::before {
+  content: '←';
+  font-size: 24px;
+}
+
+.team-profile-card {
+  background: rgba(20,30,20,0.8);
+  border-radius: var(--radius-medium);
+  padding: 40px;
+  border: 2px solid rgba(0,255,100,0.3);
+}
+
+/* Team Spirit - White and Black Theme */
+.team-profile-card.team-spirit {
+  background: rgba(20,20,20,0.95);
+  border: 2px solid rgba(255,255,255,0.4);
+}
+
+.team-profile-card.team-spirit .profile-team-name {
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255,255,255,0.5);
+}
+
+.team-profile-card.team-spirit .section-title {
+  color: #ffffff;
+  border-bottom: 2px solid rgba(255,255,255,0.4);
+}
+
+.team-profile-card.team-spirit .stat-value {
+  color: #ffffff;
+}
+
+.team-profile-card.team-spirit .team-logo-large {
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.4);
+}
+
+.team-profile-card.team-spirit .achievement-item {
+  border-left: 4px solid #ffffff;
+}
+
+.team-profile-card.team-spirit .player-avatar {
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  color: #000;
+}
+
+/* ParaVision - Purple/Pink Theme */
+.team-profile-card.paravision {
+  background: rgba(30,20,40,0.95);
+  border: 2px solid rgba(160,92,245,0.5);
+}
+
+.team-profile-card.paravision .profile-team-name {
+  color: #a05cf5;
+  text-shadow: 0 0 20px rgba(160,92,245,0.6);
+}
+
+.team-profile-card.paravision .section-title {
+  color: #a05cf5;
+  border-bottom: 2px solid rgba(160,92,245,0.5);
+}
+
+.team-profile-card.paravision .stat-value {
+  color: #a05cf5;
+}
+
+.team-profile-card.paravision .team-logo-large {
+  background: rgba(160,92,245,0.15);
+  border: 2px solid rgba(160,92,245,0.5);
+}
+
+.team-profile-card.paravision .achievement-item {
+  border-left: 4px solid #a05cf5;
+}
+
+.team-profile-card.paravision .player-avatar {
+  background: linear-gradient(135deg, #a05cf5, #7a3fb8);
+  color: #fff;
+}
+
+/* BetBoom Team - Orange/Red Theme */
+.team-profile-card.betboom {
+  background: rgba(40,20,20,0.95);
+  border: 2px solid rgba(255,140,0,0.5);
+}
+
+.team-profile-card.betboom .profile-team-name {
+  color: #ff8c00;
+  text-shadow: 0 0 20px rgba(255,140,0,0.6);
+}
+
+.team-profile-card.betboom .section-title {
+  color: #ff8c00;
+  border-bottom: 2px solid rgba(255,140,0,0.5);
+}
+
+.team-profile-card.betboom .stat-value {
+  color: #ff8c00;
+}
+
+.team-profile-card.betboom .team-logo-large {
+  background: rgba(255,140,0,0.15);
+  border: 2px solid rgba(255,140,0,0.5);
+}
+
+.team-profile-card.betboom .achievement-item {
+  border-left: 4px solid #ff8c00;
+}
+
+.team-profile-card.betboom .player-avatar {
+  background: linear-gradient(135deg, #ff8c00, #ff6b00);
+  color: #fff;
+}
+
+/* Thundra Esports - Blue/Cyan Theme */
+.team-profile-card.thundra {
+  background: rgba(20,30,40,0.95);
+  border: 2px solid rgba(0,191,255,0.5);
+}
+
+.team-profile-card.thundra .profile-team-name {
+  color: #00bfff;
+  text-shadow: 0 0 20px rgba(0,191,255,0.6);
+}
+
+.team-profile-card.thundra .section-title {
+  color: #00bfff;
+  border-bottom: 2px solid rgba(0,191,255,0.5);
+}
+
+.team-profile-card.thundra .stat-value {
+  color: #00bfff;
+}
+
+.team-profile-card.thundra .team-logo-large {
+  background: rgba(0,191,255,0.15);
+  border: 2px solid rgba(0,191,255,0.5);
+}
+
+.team-profile-card.thundra .achievement-item {
+  border-left: 4px solid #00bfff;
+}
+
+.team-profile-card.thundra .player-avatar {
+  background: linear-gradient(135deg, #00bfff, #0080ff);
+  color: #fff;
+}
+
+/* Xtreme Gaming - Red/Gold Theme */
+.team-profile-card.xtreme-gaming {
+  background: rgba(40,20,20,0.95);
+  border: 2px solid rgba(255,215,0,0.5);
+}
+
+.team-profile-card.xtreme-gaming .profile-team-name {
+  color: #ffd700;
+  text-shadow: 0 0 20px rgba(255,215,0,0.6);
+}
+
+.team-profile-card.xtreme-gaming .section-title {
+  color: #ffd700;
+  border-bottom: 2px solid rgba(255,215,0,0.5);
+}
+
+.team-profile-card.xtreme-gaming .stat-value {
+  color: #ffd700;
+}
+
+.team-profile-card.xtreme-gaming .team-logo-large {
+  background: rgba(255,215,0,0.15);
+  border: 2px solid rgba(255,215,0,0.5);
+}
+
+.team-profile-card.xtreme-gaming .achievement-item {
+  border-left: 4px solid #ffd700;
+}
+
+.team-profile-card.xtreme-gaming .player-avatar {
+  background: linear-gradient(135deg, #ffd700, #ff8c00);
+  color: #000;
+}
+
+.profile-header {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+  align-items: center;
+}
+
+.team-logo-large {
+  width: 120px;
+  height: 120px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 2px solid rgba(0,255,100,0.3);
+}
+
+.team-logo-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-team-name {
+  font-size: 32px;
+  font-weight: 900;
+  color: #00ff88;
+  margin: 0 0 10px 0;
+  text-shadow: 0 0 20px rgba(0,255,136,0.5);
+}
+
+.profile-team-tag {
+  font-size: 18px;
+  color: var(--color-text-light);
+  margin: 0 0 20px 0;
+}
+
+.profile-region {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #00ff88;
+  margin: 0 0 20px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(0,255,100,0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.about-text {
+  color: var(--color-text-light);
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 40px;
+  background: rgba(0,0,0,0.3);
+  padding: 20px;
+  border-radius: var(--radius-small);
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.stat-label {
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.stat-value {
+  color: #00ff88;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.achievements-section {
+  margin-bottom: 40px;
+}
+
+.achievements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.achievement-item {
+  background: rgba(0,0,0,0.3);
+  padding: 15px;
+  border-radius: var(--radius-small);
+  border-left: 4px solid #00ff88;
+}
+
+.achievement-title {
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.achievement-detail {
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+.roster-section {
+  margin-bottom: 40px;
+}
+
+.roster-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.player-card {
+  background: rgba(0,0,0,0.3);
+  padding: 15px;
+  border-radius: var(--radius-small);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.player-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00ff88, #00cc66);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: #000;
+  font-size: 18px;
+  overflow: hidden;
+}
+
+.player-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.player-info {
+  flex: 1;
+}
+
+.player-name {
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.player-role {
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+.player-real-name {
+  color: var(--color-gray-muted);
+  font-size: 11px;
+}
+
+.team-history {
+  color: var(--color-text-light);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* Footer */
+.footer-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  color: var(--color-gold);
+  font-weight: 600;
+  font-size: 12px;
+  padding: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  background: var(--gradient-footer);
+}
+
+.footer-logo {
+  font-family: var(--font-logo);
+  font-weight: 900;
+  font-size: 14px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  header { height: 80px; }
+  .text-logo { font-size: 32px; }
+  .dota2-logo { width: 56px; }
+  nav { gap: var(--spacing-sm); }
+  nav a { font-size: 14px; }
+  .header-top { padding: 0 var(--spacing-md); }
+  .main-content { padding: 30px 20px; }
+  .teams-container { padding: 25px; }
+  .team-profile-card { padding: 25px; }
+  
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .table-header,
+  .team-row {
+    grid-template-columns: 60px 1fr 100px;
+    gap: 15px;
+  }
+  
+  .team-tag { font-size: 13px; }
+  .team-name { font-size: 13px; }
+}
+
+@media (max-width: 480px) {
+  .header-top { flex-wrap: wrap; padding: 10px var(--spacing-sm); }
+  nav { width: 100%; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
+  .text-logo { font-size: 24px; }
+  .dota2-logo { width: 40px; }
+  .main-content { padding: 20px 10px; }
+  .teams-container { padding: 20px; }
+  .team-profile-card { padding: 20px; }
+  
+  .team-logo-large {
+    width: 80px;
+    height: 80px;
+    font-size: 32px;
+  }
+  
+  .profile-team-name {
+    font-size: 24px;
+  }
+  
+  .table-header,
+  .team-row {
+    grid-template-columns: 50px 1fr 90px;
+    gap: 10px;
+  }
+  
+  .team-flag { width: 24px; height: 17px; }
+  .teams-title { font-size: 20px; }
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-top">
+        <div class="header-left">
+          <div class="text-logo">CS</div>
+          <img
+            src="https://i.pinimg.com/1200x/d0/de/5d/d0de5ddddd3e7c704511c912f1a60a63.jpg"
+            alt="Logo"
+            class="dota2-logo"
+          />
+        </div>
+
+        <nav>
+          <a href="Main.html">Home</a>
+          <a href="Match.html">Match</a>
+          <a href="New.html">News</a>
+          <a href="teams.html">Teams</a>
+          <a href="Players.html">Players</a>
+          <a href="watch.html">Watch/Vod</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Teams List View -->
+      <div id="teamsListView" class="teams-list-view">
+        <div class="teams-container">
+          <div class="teams-header">
+            <h1 class="teams-title">TEAM</h1>
+          </div>
+
+          <div class="teams-table">
+            <div class="table-header">
+              <div class="table-header-cell">Place</div>
+              <div class="table-header-cell">Team</div>
+              <div class="table-header-cell" style="text-align: right;">Earned</div>
+            </div>
+
+            <div id="teamsList">
+              <!-- Team rows will be generated by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Profile View -->
+      <div id="teamProfileView" class="team-profile-view">
+        <!-- Profile content will be dynamically generated -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-text">
+      <div class="footer-logo">CS</div> &copy; 2025 Champion Showdown Esports
+    </div>
+  </div>
+
+  <script>
+    const teamsData = [
+      {
+        id: 'flcn',
+        place: 1,
+        tag: 'FLCN',
+        name: 'Team Falcon',
+        flag: 'https://imgs.search.brave.com/SrOJ4slrFlbAfk2xFvjvxYMGV4bpNF57C4sSJJkOo0Y/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/YnJpdGFubmljYS5j/b20vNzkvNTc3OS0w/NTAtNDZDOTk5QUYv/RmxhZy1TYXVkaS1B/cmFiaWEuanBn',
+        earned: '$3.0M',
+        region: 'Saudi Arabia',
+        logo: 'https://ggscore.com/media/logo/t97509.png?650',
+        about: `Team Falcon FLCN is a professional Dota 2 team create from Saudi Arabia. The organization was founded in 2017 and has since become one of the most successful teams in the Middle East region. Team Falcon has participated in numerous tournaments and has achieved significant success, including winning multiple regional championships and competing in international events. The team is known for its aggressive playstyle and strong teamwork, making them a formidable opponent in any match.`,
+        wins: 142,
+        winRate: '64.5%',
+        totalEarnings: '$6.5M',
+        achievements: [
+          { title: 'FLCN NA S2', detail: '1st Place' },
+          { title: 'Major Champions', detail: '2nd Place' },
+          { title: 'Regional Finals', detail: '1st Place' }
+        ],
+        roster: [
+          { name: 'Skiter', role: 'Carry', realName: 'Omar Khalil (23 y.o)', image: 'https://ggscore.com/media/logo/p3400.png' },
+          { name: 'Malr1ne', role: 'Mid', realName: 'Stanislav Potorak (21 y.o)', image: 'https://ggscore.com/media/logo/p73481.png' },
+          { name: 'ATF', role: 'Offlane', realName: 'Ammar Al-Assaf (20 y.o)', image: 'https://ggscore.com/media/logo/p68172.png?807' },
+          { name: 'Crit', role: 'Support', realName: 'Andreas Nielsen (29 y.o)', image: 'https://ggscore.com/media/logo/p57.png' },
+          { name: 'Sneyking', role: 'Support', realName: 'Jingjun Wu (30 y.o)', image: 'https://ggscore.com/media/logo/p195.png' }
+        ],
+        history: `Team Falcon was formed in late 2021 by a group of talented players from the Middle East region. The team quickly rose to prominence in the regional scene, dominating local tournaments and qualifiers. In 2022, they made their international debut at The International qualifiers, where they impressed many with their innovative strategies and mechanical skill. Throughout 2023 and 2024, Team Falcon continued to grow, acquiring experienced players and achieving top placements in various DPC tournaments. Their breakthrough came in 2025 when they secured multiple championship titles and established themselves as a tier-1 team capable of competing with the best in the world.`
+      },
+      {
+        id: 'tspirit',
+        place: 2,
+        tag: 'TSpirit',
+        name: 'Team Spirit',
+        flag: 'https://flagcdn.com/w40/rs.png',
+        earned: '$1.9',
+        region: 'Eastern Europe',
+        logo: 'https://ggscore.com/media/logo/_60/t6224.png?750',
+        about: `Team Spirit is a legendary Eastern European esports organization founded in 2015. The organization gained worldwide recognition after their stunning victory at The International 2021, where they defeated PSG.LGD in a thrilling grand finals. Team Spirit has become synonymous with clutch plays, innovative drafting strategies, and exceptional team coordination. The organization continues to be a dominant force in the competitive Dota 2 scene, consistently placing high in major tournaments and maintaining their status as one of the best teams in the world.`,
+        wins: 128,
+        winRate: '64%%',
+        totalEarnings: '$30.5M',
+        achievements: [
+          { title: 'Blast Slam #4', detail: '5th Place' },
+          { title: 'TI 2025', detail: '9th Place' },
+          { title: 'Riyadh Masters 2025', detail: '1st Place' }
+        ],
+        roster: [
+          { name: 'Yatoro雨', role: 'Carry', realName: 'Illya Mulyarchuk (22 y.o)', image: 'https://ggscore.com/media/logo/p43915.png?672' },
+          { name: 'Larl', role: 'Mid', realName: 'Denis Sigitov (23 y.o)',  image: 'https://ggscore.com/media/logo/p25891.png?542' },
+          { name: 'Collapse', role: 'Offlane', realName: 'Magomed Khalilov (23 y.o)', image: 'https://ggscore.com/media/logo/p42211.png?397' },
+          { name: 'Panto', role: 'Support', realName: 'Nikita Balaganin (26 y.o)', image: 'https://ggscore.com/media/logo/p42201.png?256' },
+          { name: 'rue', role: 'Support', realName: 'Aleksandr Filin (21 y.o)', image: 'https://ggscore.com/media/logo/p73781.png?813' }
+        ],
+        history: `Team Spirit's journey began in 2015 as a CIS organization. The team experienced moderate success in regional tournaments but struggled to break through on the international stage. Everything changed in 2021 when they assembled a young, hungry roster that would go on to make history. Despite being considered underdogs at The International 2021, Team Spirit delivered one of the most memorable championship runs in Dota 2 history. Their innovative Magnus plays by Collapse and clutch performances from Yatoro became legendary. Since their TI victory, Team Spirit has continued to evolve and adapt, maintaining their position among the world's elite teams while nurturing new talent.`
+      },
+      {
+        id: 'pv',
+        place: 3,
+        tag: 'PV',
+        name: 'ParaVision',
+        flag: 'https://flagcdn.com/w40/rs.png',
+        earned: '$1.6M',
+        region: 'Eastern Europe',
+        logo: 'https://ggscore.com/media/logo/_60/t101027.png?840',
+        about: `ParaVision is an emerging Eastern European organization that has quickly risen through the ranks of competitive Dota 2. Founded in 2022, the team combines veteran leadership with young mechanical skill to create a formidable lineup. ParaVision is known for their aggressive early-game strategies and exceptional vision control, which has earned them their distinctive name. The team has shown remarkable growth in their short existence, securing several top finishes in DPC tournaments and proving they can compete with established powerhouses.`,
+        wins: 140,
+        winRate: '63.0%',
+        totalEarnings: '$2.2M',
+        achievements: [
+          { title: 'TI 2025', detail: '3rd Place' },
+          { title: 'Riyadh Masters 2025', detail: '3rd Place' },
+          { title: 'DL S26', detail: '1st Place' }
+        ],
+        roster: [
+          { name: 'Satanic', role: 'Carry', realName: 'Alan Gallyamov (18 y.o)',  image: 'https://ggscore.com/media/logo/p129409.png?786' },
+          { name: 'No[o]ne', role: 'Mid', realName: 'Vladimir Minenko (27 y.o)',  image: 'https://ggscore.com/media/logo/p2606.png?713' },
+          { name: 'DM', role: 'Offlane', realName: 'Dmitrii Dorokhin (25 y.o)', image: 'https://ggscore.com/media/logo/p20362.png?162' },
+          { name: '9class', role: 'Support', realName: 'Edgar Naltakyan (2 y.o)',  image: 'https://ggscore.com/media/logo/p125305.png?880' },
+          { name: 'Dukalis', role: 'Support', realName: 'Andrei Kuropatkin (23 y.o)', image: 'https://ggscore.com/media/logo/p29803.png?271' }
+        ],
+        history: `ParaVision was formed in early 2022 by a group of players who had previously competed on tier-2 teams in the Eastern European region. The organization's vision was to create a team that emphasized strategic depth and exceptional map awareness. Their breakthrough came during the 2023 DPC season when they defeated several established teams to qualify for their first Major. The team's distinctive playstyle, focusing on vision control and aggressive rotations, has made them a challenging opponent for any team. ParaVision continues to grow and develop, with analysts predicting they could be future Major champions.`
+      },
+      {
+        id: 'bb',
+        place: 4,
+        tag: 'BB',
+        name: 'BetBoom Team',
+        flag: 'https://flagcdn.com/w40/ru.png',
+        earned: '$1.3M',
+        region: 'Eastern Europe',
+        logo: 'https://ggscore.com/media/logo/t90638.png?783',
+        about: `BetBoom Team represents the explosive and unpredictable nature of Russian Dota 2. Backed by the BetBoom entertainment company, the team has quickly established itself as a force in the competitive scene. Known for their aggressive fighting style and willingness to take high-risk, high-reward plays, BetBoom Team embodies the spirit of CIS Dota. The organization has invested heavily in infrastructure and player development, creating an environment where talent can thrive. Their matches are always entertaining, filled with action-packed team fights and unexpected strategies.`,
+        wins: 147,
+        winRate: '56%',
+        totalEarnings: '$4.9M',
+        achievements: [
+          { title: 'Blast Slam #4', detail: '9th Place' },
+          { title: 'TI 2025', detail: '4th Place' },
+          { title: 'PGL Wallachia S5', detail: '1st Place' }
+        ],
+        roster: [
+          { name: 'Kiritych', role: 'Carry', realName: 'Ilja Uljanow (22 y.o)', image: 'https://ggscore.com/media/logo/p45268.png?689' }, 
+          { name: 'gpk~', role: 'Mid', realName: 'Danil Skutin (24 y.o)',  image: 'https://ggscore.com/media/logo/p24824.png?984' },
+          { name: 'MieRo', role: 'Offlane', realName: 'Matvey Vasunin (22 y.o)', image: 'https://ggscore.com/media/logo/p78495.png?632' },
+          { name: 'Katomi', role: 'Support', realName: 'Vladislav (26 y.o)', image: 'https://ggscore.com/media/logo/p44135.png?683' },
+          { name: 'Save-', role: 'Support', realName: 'Dmitry Petrov (23 y.o)', image: 'https://ggscore.com/media/logo/p30315.png?729' }
+        ],
+        history: `BetBoom Team was founded in 2021 as the esports division of BetBoom Entertainment. The organization quickly made waves by signing several high-profile players from established teams. Their first year saw mixed results as the team worked to develop chemistry, but by 2022, they had found their rhythm. BetBoom Team's aggressive, fight-oriented playstyle has made them fan favorites, with their matches often featuring the highest kill counts in tournaments. The team has consistently placed in the top tier of Eastern European Dota, qualifying for multiple Majors and proving they can stand toe-to-toe with any team in high-intensity situations.`
+      },
+      {
+        id: 'thundra',
+        place: 5,
+        tag: 'Thundra',
+        name: 'Thundra Esports',
+        flag: 'https://flagcdn.com/w40/gb.png',
+        earned: '$2.4M',
+        region: 'Western Europe',
+        logo: 'https://ggscore.com/media/logo/t74703.png?389',
+        about: `Thundra Esports is a Western European powerhouse that has taken the competitive Dota 2 scene by storm. Founded in 2020, the organization prides itself on lightning-fast execution and aggressive tempo-based gameplay. Thundra's approach to Dota is all about maintaining constant pressure on opponents, never allowing them to execute their game plan. The team has become known for their exceptional early-game prowess and ability to snowball small advantages into dominant victories. With a roster of mechanically gifted players and tactical brilliance, Thundra Esports continues to electrify audiences worldwide.`,
+        wins: 137,
+        winRate: '66.4%',
+        totalEarnings: '$14.2 M',
+        achievements: [
+          { title: 'Blast Slam #4', detail: '1st Place' },
+          { title: 'TI 2025', detail: '7th Place' },
+          { title: 'Clavision Masters 2025', detail: '2nd Place' }
+        ],
+        roster: [
+          { name: 'Pure', role: 'Carry', realName: 'Ivan Moskalenko (21 y.o)',  image: 'https://ggscore.com/media/logo/p102822.png?524' },
+          { name: 'BZM', role: 'Mid', realName: 'Bozhidar Bogdanov (20 y.o)',  image: 'https://ggscore.com/media/logo/p82154.png?71' },
+          { name: '33', role: 'Offlane', realName: 'Neta Shapira (28 y.o)',  image: 'https://ggscore.com/media/logo/p2972.png?382' },
+          { name: 'Whitemon', role: 'Support', realName: 'Matthew Filemona (25 y.o)',  image: 'https://ggscore.com/media/logo/p24753.png' },
+          { name: 'Ari', role: 'Support', realName: 'Matthew Walker (22 y.o)', image: 'https://ggscore.com/media/logo/p107023.png?75' }
+        ],
+        history: `Thundra Esports was established in 2020 with the goal of bringing together veteran players who still had the hunger to compete at the highest level. The organization's name reflects their gameplay philosophy – striking hard and fast like thunder. In their debut season, Thundra quickly established themselves as contenders in Western Europe, combining the experience of multiple TI winners with fresh strategic approaches. The team's success stems from their ability to adapt to any meta while maintaining their core identity of aggressive, tempo-controlling Dota. Thundra has become one of the most respected organizations in the scene, known for both their in-game excellence and professional conduct.`
+      },
+      {
+        id: 'xg',
+        place: 6,
+        tag: 'XG',
+        name: 'Xtreme Gaming',
+        flag: 'https://flagcdn.com/w40/cn.png',
+        earned: '$1.5M',
+        region: 'China',
+        logo: 'https://ggscore.com/media/logo/t72899.png?447',
+        about: `Xtreme Gaming is one of China's most prestigious Dota 2 organizations, carrying the legacy of Chinese excellence in esports. Founded by former professional players who understood the dedication required to succeed at the highest level, XG has consistently produced top-tier results. The organization is known for their methodical approach to the game, exceptional team discipline, and ability to execute complex strategies flawlessly. Xtreme Gaming represents the pinnacle of Chinese Dota, combining traditional strengths of teamwork and farming efficiency with modern aggressive tactics. Their dragon logo symbolizes power, wisdom, and the indomitable spirit of Chinese esports.`,
+        wins: 112,
+        winRate: '54%',
+        totalEarnings: '$3.1M',
+        achievements: [
+          { title: 'TI 2025', detail: '2nd Place' },
+          { title: 'Clavision Master 2025', detail: '3rd Place' },
+          { title: 'ACL 2025', detail: '1st Place' }
+        ],
+        roster: [
+          { name: 'Ame', role: 'Carry', realName: 'Wang Chunyu (28 y.o)',  image: 'https://ggscore.com/media/logo/p7639.png?114' },
+          { name: 'NothingToSay', role: 'Mid', realName: 'Cheng Jin Xiang (24 y.o)',  image: 'https://ggscore.com/media/logo/p20275.png?75' },
+          { name: 'Xxs', role: 'Offlane', realName: 'Lin Jing (26 y.o)', image: 'https://ggscore.com/media/logo/p7657.png' },
+          { name: 'fy', role: 'Support', realName: 'Xu Linsen (30 y.o)', image: 'https://ggscore.com/media/logo/p8.png?248' },
+          { name: 'XinQ', role: 'Support', realName: 'Yap Jian Wei (28 y.o)', image: 'https://ggscore.com/media/logo/p7162.png' }
+        ],
+        history: `Xtreme Gaming was founded in 2017 as a response to the changing landscape of Chinese Dota 2. The organization sought to blend the traditional strengths of Chinese teams – superior farming patterns and team coordination – with more aggressive, internationally-minded strategies. XG's rise to prominence came in 2019 when they qualified for their first Major, immediately proving they belonged among the world's elite. The team's distinctive style combines patient farming with explosive team fights, often catching opponents off-guard with sudden aggression after minutes of calculated play. Xtreme Gaming has become a pillar of the Chinese Dota scene, regularly competing for championships and representing the region with pride at international events. Their success has inspired a new generation of Chinese players and solidified their place in Dota 2 history.`
+      }
+    ];
+
+    const teamsList = document.getElementById('teamsList');
+    const teamsListView = document.getElementById('teamsListView');
+    const teamProfileView = document.getElementById('teamProfileView');
+
+    // Generate team rows
+    teamsData.forEach(team => {
+      const row = document.createElement('div');
+      row.classList.add('team-row');
+      row.innerHTML = `
+        <div class="team-place">${team.place}</div>
+        <div class="team-info">
+          <img src="${team.flag}" alt="flag" class="team-flag">
+          <span class="team-tag">${team.tag}</span>
+          <span class="team-name">${team.name}</span>
+        </div>
+        <div class="team-earned">${team.earned}</div>
+      `;
+      row.addEventListener('click', () => openTeamProfile(team.id));
+      teamsList.appendChild(row);
+    });
+
+    function openTeamProfile(teamId) {
+      const team = teamsData.find(t => t.id === teamId);
+      if (!team) return;
+
+      let achievementsHTML = '';
+      if (team.achievements.length > 0) {
+        achievementsHTML = `
+          <div class="achievements-section">
+            <h3 class="section-title">FLCN Achievements</h3>
+            <div class="achievements-list">
+              ${team.achievements.map(ach => `
+                <div class="achievement-item">
+                  <div class="achievement-title">${ach.title}</div>
+                  <div class="achievement-detail">${ach.detail}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      let rosterHTML = '';
+      if (team.roster.length > 0) {
+        rosterHTML = `
+          <div class="roster-section">
+            <h3 class="section-title">FLCN Roster</h3>
+            <div class="roster-list">
+              ${team.roster.map((player, index) => `
+                <div class="player-card">
+                  <div class="player-avatar">${player.image ? `<img src="${player.image}" alt="${player.name}">` : player.name[0]}</div>
+                  <div class="player-info">
+                    <div class="player-name">${player.name}</div>
+                    <div class="player-role">${player.role}</div>
+                    <div class="player-real-name">${player.realName}</div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      teamProfileView.innerHTML = `
+        <div class="back-button" onclick="closeTeamProfile()">Back</div>
+        <div class="team-profile-card${team.id === 'tspirit' ? ' team-spirit' : team.id === 'pv' ? ' paravision' : team.id === 'bb' ? ' betboom' : team.id === 'thundra' ? ' thundra' : team.id === 'xg' ? ' xtreme-gaming' : ''}">
+          <div class="profile-header">
+            <div class="team-logo-large"><img src="${team.logo}" alt="${team.name} logo"></div>
+            <div class="profile-info">
+              <h1 class="profile-team-name">${team.name}</h1>
+              <p class="profile-team-tag">${team.tag}</p>
+              <div class="profile-region">
+                <img src="${team.flag}" alt="flag" class="team-flag">
+                <span>${team.region}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-section">
+            <h3 class="section-title">About</h3>
+            <p class="about-text">${team.about}</p>
+          </div>
+
+          <div class="stats-section">
+            <h3 class="section-title">Stats section</h3>
+            <div class="stats-grid">
+              <div class="stat-item">
+                <span class="stat-label">Wins</span>
+                <span class="stat-value">${team.wins}</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Win Rate</span>
+                <span class="stat-value">${team.winRate}</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Total Earnings</span>
+                <span class="stat-value">${team.totalEarnings}</span>
+              </div>
+            </div>
+          </div>
+
+          ${achievementsHTML}
+          ${rosterHTML}
+
+          ${team.history ? `
+            <div class="history-section">
+              <h3 class="section-title">About Team</h3>
+              <div class="team-history">${team.history}</div>
+            </div>
+          ` : ''}
+        </div>
+      `;
+
+      teamsListView.style.display = 'none';
+      teamProfileView.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeTeamProfile() {
+      teamProfileView.classList.remove('active');
+      teamsListView.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
