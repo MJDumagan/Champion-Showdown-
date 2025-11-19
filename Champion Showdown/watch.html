@@ -5,6 +5,456 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Match Details - Champion Showdown</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-top">
+        <div class="header-left">
+          <div class="text-logo">CS</div>
+          <img src="https://i.pinimg.com/1200x/d0/de/5d/d0de5ddddd3e7c704511c912f1a60a63.jpg"
+            alt="Dota 2 Logo"
+            class="dota2-logo"
+          />
+        </div>
+
+       <nav class="top-nav">
+          <a href="Main.html">Home</a>
+          <a href="Match.html">Match</a>
+          <a href="New.html">News</a>
+          <a href="teams.html">Teams</a>
+          <a href="Players.html">Players</a>
+          <a href="watch.html">Watch/Vod</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      
+      <!-- Game Details View (Game 1) -->
+      <div id="game1" class="game-details-view">
+        <button class="back-button" onclick="window.location.hash='#playoff'">Back</button>
+        
+        <!-- Game Tabs -->
+        <div class="game-tabs">
+          <a href="#game1" class="game-tab active">Game 1</a>
+          <a href="#game2" class="game-tab">Game 2</a>
+          <a href="#game3" class="game-tab">Game 3</a>
+          <a href="#game4" class="game-tab">Game 4</a>
+          <a href="#game5" class="game-tab">Game 5</a>
+        </div>
+
+        <!-- Match Header -->
+        <div class="match-header">
+          <div class="match-header-content">
+            <div class="match-status-badge">🏆 Grand Finals</div>
+            <div class="teams-versus">
+              <div class="team-side">
+                <div class="team-logo-large">
+                  <img src="https://ggscore.com/media/logo/t72899.png?447" alt="Xtreme-Gaming">
+                </div>
+                <div class="team-name">Xtreme-Gaming</div>
+              </div>
+              <div class="vs-large">VS</div>
+              <div class="team-side">
+                <div class="team-logo-large">
+                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
+                </div>
+                <div class="team-name">Team Falcon</div>
+              </div>
+            </div>
+            <div class="match-type">Finals</div>
+          </div>
+        </div>
+
+        <!-- Xtreme Gaming Hero Picks -->
+        <div class="hero-picks-section">
+          <div class="team-picks dire">
+            <div class="team-header">
+              <div class="team-name-picks">Xtreme Gaming</div>
+            </div>
+            <div class="heroes-grid">
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/mars.png" alt="Mars">
+                </div>
+                <div class="hero-name">MARS</div>
+                <div class="player-name">Xxs</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/hoodwink.png" alt="Hoodwink">
+                </div>
+                <div class="hero-name">HOODWINK</div>
+                <div class="player-name">Xinq</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/elder_titan.png" alt="Elder Titan">
+                </div>
+                <div class="hero-name">ELDER TITAN</div>
+                <div class="player-name">Xnova</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/ursa.png" alt="Ursa">
+                </div>
+                <div class="hero-name">URSA</div>
+                <div class="player-name">Ame</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/queenofpain.png" alt="Queen of Pain">
+                </div>
+                <div class="hero-name">QUEEN OF PAIN</div>
+                <div class="player-name">Xm</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Team Falcons Hero Picks -->
+          <div class="team-picks radiant">
+            <div class="team-header">
+              <div class="team-name-picks">Team Falcons</div>
+            </div>
+            <div class="heroes-grid">
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/pangolier.png" alt="Pangolier">
+                </div>
+                <div class="hero-name">PANGOLIER</div>
+                <div class="player-name">Sneyking</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/snapfire.png" alt="Snapfire">
+                </div>
+                <div class="hero-name">SNAPFIRE</div>
+                <div class="player-name">Malr1ne</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/enchantress.png" alt="Enchantress">
+                </div>
+                <div class="hero-name">ENCHANTRESS</div>
+                <div class="player-name">Sneyking</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/sven.png" alt="Sven">
+                </div>
+                <div class="hero-name">SVEN</div>
+                <div class="player-name">skiter</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/ember_spirit.png" alt="Ember Spirit">
+                </div>
+                <div class="hero-name">EMBER SPIRIT</div>
+                <div class="player-name">ATF</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Section -->
+        <div class="video-section">
+          <a href="https://www.youtube.com/watch?v=yMcQ6EZyAi0" class="video-link" target="_blank">
+            [EN] FLCN vs XG - Game 1 - TI 2025 Grand Finals - Full Match VOD
+          </a>
+        </div>
+      </div>
+
+      <!-- Game Details View (Game 5) -->
+      <div id="game5" class="game-details-view">
+        <button class="back-button" onclick="window.location.hash='#playoff'">Back</button>
+        
+        <!-- Game Tabs -->
+        <div class="game-tabs">
+          <a href="#game1" class="game-tab">Game 1</a>
+          <a href="#game2" class="game-tab">Game 2</a>
+          <a href="#game3" class="game-tab">Game 3</a>
+          <a href="#game4" class="game-tab">Game 4</a>
+          <a href="#game5" class="game-tab active">Game 5</a>
+        </div>
+
+        <!-- Match Header -->
+        <div class="match-header">
+          <div class="match-header-content">
+            <div class="match-status-badge">🏆 Grand Finals</div>
+            <div class="teams-versus">
+              <div class="team-side">
+                <div class="team-logo-large">
+                  <img src="https://ggscore.com/media/logo/t72899.png?447" alt="Xtreme-Gaming">
+                </div>
+                <div class="team-name">Xtreme-Gaming</div>
+              </div>
+              <div class="vs-large">VS</div>
+              <div class="team-side">
+                <div class="team-logo-large">
+                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
+                </div>
+                <div class="team-name">Team Falcon</div>
+              </div>
+            </div>
+            <div class="match-type">Finals</div>
+          </div>
+        </div>
+
+        <!-- Xtreme Gaming Hero Picks -->
+        <div class="hero-picks-section">
+          <div class="team-picks dire">
+            <div class="team-header">
+              <div class="team-name-picks">Xtreme Gaming</div>
+            </div>
+            <div class="heroes-grid">
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/earthshaker.png" alt="Earth Shaker">
+                </div>
+                <div class="hero-name">EARTH SHAKER</div>
+                <div class="player-name">Xxs</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/shadow_demon.png" alt="Shadow Demon">
+                </div>
+                <div class="hero-name">SHADOW DEMON</div>
+                <div class="player-name">Xinq</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://game-tournaments.com/media/game/hero/582/_256/11.png" alt="Shadow Fiend">
+                </div>
+                <div class="hero-name">SHADOW FIEND</div>
+                <div class="player-name">Xm</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/ursa.png" alt="Ursa">
+                </div>
+                <div class="hero-name">URSA</div>
+                <div class="player-name">Xnova</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/juggernaut.png" alt="Juggernaut">
+                </div>
+                <div class="hero-name">JUGGERNAUT</div>
+                <div class="player-name">Ame</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Team Falcons Hero Picks -->
+          <div class="team-picks radiant">
+            <div class="team-header">
+              <div class="team-name-picks">Team Falcons</div>
+            </div>
+            <div class="heroes-grid">
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/naga_siren.png" alt="Naga Siren">
+                </div>
+                <div class="hero-name">NAGA SIREN</div>
+                <div class="player-name">Sneyking</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/snapfire.png" alt="Snapfire">
+                </div>
+                <div class="hero-name">SNAPFIRE</div>
+                <div class="player-name">Malr1ne</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/disruptor.png" alt="Disruptor">
+                </div>
+                <div class="hero-name">DISRUPTOR</div>
+                <div class="player-name">Sneyking</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/medusa.png" alt="Medusa">
+                </div>
+                <div class="hero-name">MEDUSA</div>
+                <div class="player-name">skiter</div>
+              </div>
+              <div class="hero-card">
+                <div class="hero-image">
+                  <img src="https://game-tournaments.com/media/game/hero/582/_256/97.png" alt="Magnus">
+                </div>
+                <div class="hero-name">MAGNUS</div>
+                <div class="player-name">ATF</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Section -->
+        <div class="video-section">
+          <a href="https://www.youtube.com/watch?v=cHvTjBIX53c" class="video-link" target="_blank">
+            [EN] FLCN vs XG - Game 5 - TI 2025 Grand Finals - Full Match VOD
+          </a>
+        </div>
+      </div>
+
+      <!-- Playoff List View -->
+      <div id="playoff" class="playoff-list-view">
+        <div class="playoff-section">
+          <h1 class="playoff-title">Playoff</h1>
+          
+          <div class="playoff-games">
+            <!-- Game 5 -->
+            <a href="#game5" class="game-card">
+              <div class="game-teams-logos">
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/t72899.png?447" alt="Xtreme-Gaming">
+                </div>
+                <div class="vs-text">VS</div>
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
+                </div>
+              </div>
+              <div class="game-info">
+                <div class="game-title">TI 2025 Playoff Grand Final- Game 5</div>
+                <div class="game-status">Completed</div>
+              </div>
+            </a>
+
+            <!-- Game 4 -->
+            <a href="#game4" class="game-card">
+              <div class="game-teams-logos">
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/t72899.png?447" alt="Xtreme-Gaming">
+                </div>
+                <div class="vs-text">VS</div>
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
+                </div>
+              </div>
+              <div class="game-info">
+                <div class="game-title">TI 2025 Playoff Grand Final- Game 4</div>
+                <div class="game-status">Completed</div>
+              </div>
+            </a>
+
+            <!-- Game 3 -->
+            <a href="#game3" class="game-card">
+              <div class="game-teams-logos">
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/t72899.png?447" alt="Xtreme-Gaming">
+                </div>
+                <div class="vs-text">VS</div>
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
+                </div>
+              </div>
+              <div class="game-info">
+                <div class="game-title">TI 2025 Playoff Grand Final- Game 3</div>
+                <div class="game-status">Completed</div>
+              </div>
+            </a>
+
+            <!-- Game 2 -->
+            <a href="#game2" class="game-card">
+              <div class="game-teams-logos">
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/t72899.png?447" alt="Xtreme-Gaming">
+                </div>
+                <div class="vs-text">VS</div>
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
+                </div>
+              </div>
+              <div class="game-info">
+                <div class="game-title">TI 2025 Playoff Grand Final- Game 2</div>
+                <div class="game-status">Completed</div>
+              </div>
+            </a>
+
+            <!-- Game 1 -->
+            <a href="#game1" class="game-card">
+              <div class="game-teams-logos">
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/t72899.png?447" alt="xtreme-Gaming">
+                </div>
+                <div class="vs-text">VS</div>
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
+                </div>
+              </div>
+              <div class="game-info">
+                <div class="game-title">TI 2025 Playoff Grand Final- Game 1</div>
+                <div class="game-status">Completed</div>
+              </div>
+            </a>
+
+            <!-- Upper Semi Game 3 -->
+            <a href="#uppersemi3" class="game-card">
+              <div class="game-teams-logos">
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/_60/t101027.png?840" alt="ParaVision">
+                </div>
+                <div class="vs-text">VS</div>
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
+                </div>
+              </div>
+              <div class="game-info">
+                <div class="game-title">TI 2025 Playoff Upper Semi- Game 3</div>
+                <div class="game-status">Completed</div>
+              </div>
+            </a>
+
+            <!-- Upper Semi Game 2 -->
+            <a href="#uppersemi2" class="game-card">
+              <div class="game-teams-logos">
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/_60/t101027.png?840" alt="ParaVision">
+                </div>
+                <div class="vs-text">VS</div>
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
+                </div>
+              </div>
+              <div class="game-info">
+                <div class="game-title">TI 2025 Playoff Upper Semi- Game 2</div>
+                <div class="game-status">Completed</div>
+              </div>
+            </a>
+
+            <!-- Upper Semi Game 1 -->
+            <a href="#uppersemi1" class="game-card">
+              <div class="game-teams-logos">
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/_60/t101027.png?840" alt="ParaVision">
+                </div>
+                <div class="vs-text">VS</div>
+                <div class="team-logo-small">
+                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
+                </div>
+              </div>
+              <div class="game-info">
+                <div class="game-title">TI 2025 Playoff Upper Semi- Game 1</div>
+                <div class="game-status">Completed</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-text">
+      <div class="footer-logo">CS</div> © 2025 Champion Showdown Esports
+    </div>
+  </div>
+
   <style>
 /* ===== VARIABLES ===== */
 :root {
@@ -482,454 +932,5 @@ nav a:hover { color: #ffd740; transform: translateY(-2px); }
   }
 }
   </style>
-</head>
-<body>
-  <div class="container">
-    <!-- Header -->
-    <header>
-      <div class="header-top">
-        <div class="header-left">
-          <div class="text-logo">CS</div>
-          <img src="https://i.pinimg.com/1200x/d0/de/5d/d0de5ddddd3e7c704511c912f1a60a63.jpg"
-            alt="Dota 2 Logo"
-            class="dota2-logo"
-          />
-        </div>
-
-       <nav class="top-nav">
-          <a href="Main.html">Home</a>
-          <a href="Match.html">Match</a>
-          <a href="New.html">News</a>
-          <a href="teams.html">Teams</a>
-          <a href="Players.html">Players</a>
-          <a href="watch.html">Watch/Vod</a>
-        </nav>
-      </div>
-
-    </header>
-
-    <!-- Main Content -->
-    <div class="main-content">
-      
-      <!-- Game Details View (Game 1) -->
-      <div id="game1" class="game-details-view">
-        <button class="back-button" onclick="window.location.hash='#playoff'">Back</button>
-        
-        <!-- Game Tabs -->
-        <div class="game-tabs">
-          <a href="#game1" class="game-tab active">Game 1</a>
-          <a href="#game2" class="game-tab">Game 2</a>
-          <a href="#game3" class="game-tab">Game 3</a>
-          <a href="#game4" class="game-tab">Game 4</a>
-          <a href="#game5" class="game-tab">Game 5</a>
-        </div>
-
-        <!-- Match Header -->
-        <div class="match-header">
-          <div class="match-header-content">
-            <div class="match-status-badge">🏆 Grand Finals</div>
-            <div class="teams-versus">
-              <div class="team-side">
-                <div class="team-logo-large">
-                  <img src="https://ggscore.com/media/logo/t72899.png?447" alt="Xtreme-Gaming">
-                </div>
-                <div class="team-name">Xtreme-Gaming</div>
-              </div>
-              <div class="vs-large">VS</div>
-              <div class="team-side">
-                <div class="team-logo-large">
-                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
-                </div>
-                <div class="team-name">Team Falcon</div>
-              </div>
-            </div>
-            <div class="match-type">Finals</div>
-          </div>
-        </div>
-
-        <!-- Xtreme Gaming Hero Picks -->
-        <div class="hero-picks-section">
-          <div class="team-picks dire">
-            <div class="team-header">
-              <div class="team-name-picks">Xtreme Gaming</div>
-            </div>
-            <div class="heroes-grid">
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/mars.png" alt="Mars">
-                </div>
-                <div class="hero-name">MARS</div>
-                <div class="player-name">Xxs</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/hoodwink.png" alt="Hoodwink">
-                </div>
-                <div class="hero-name">HOODWINK</div>
-                <div class="player-name">Xinq</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/elder_titan.png" alt="Elder Titan">
-                </div>
-                <div class="hero-name">ELDER TITAN</div>
-                <div class="player-name">Xnova</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/ursa.png" alt="Ursa">
-                </div>
-                <div class="hero-name">URSA</div>
-                <div class="player-name">Ame</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/queenofpain.png" alt="Queen of Pain">
-                </div>
-                <div class="hero-name">QUEEN OF PAIN</div>
-                <div class="player-name">Xm</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Team Falcons Hero Picks -->
-          <div class="team-picks radiant">
-            <div class="team-header">
-              <div class="team-name-picks">Team Falcons</div>
-            </div>
-            <div class="heroes-grid">
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/pangolier.png" alt="Pangolier">
-                </div>
-                <div class="hero-name">PANGOLIER</div>
-                <div class="player-name">Sneyking</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/snapfire.png" alt="Snapfire">
-                </div>
-                <div class="hero-name">SNAPFIRE</div>
-                <div class="player-name">Malr1ne</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/enchantress.png" alt="Enchantress">
-                </div>
-                <div class="hero-name">ENCHANTRESS</div>
-                <div class="player-name">Sneyking</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/sven.png" alt="Sven">
-                </div>
-                <div class="hero-name">SVEN</div>
-                <div class="player-name">skiter</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/ember_spirit.png" alt="Ember Spirit">
-                </div>
-                <div class="hero-name">EMBER SPIRIT</div>
-                <div class="player-name">ATF</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Video Section -->
-        <div class="video-section">
-          <a href="https://www.youtube.com/watch?v=yMcQ6EZyAi0" class="video-link" target="_blank">
-            [EN] FLCN vs XG - Game 1 - TI 2025 Grand Finals - Full Match VOD
-          </a>
-        </div>
-      </div>
-
-      <!-- Game Details View (Game 5) -->
-      <div id="game5" class="game-details-view">
-        <button class="back-button" onclick="window.location.hash='#playoff'">Back</button>
-        
-        <!-- Game Tabs -->
-        <div class="game-tabs">
-          <a href="#game1" class="game-tab">Game 1</a>
-          <a href="#game2" class="game-tab">Game 2</a>
-          <a href="#game3" class="game-tab">Game 3</a>
-          <a href="#game4" class="game-tab">Game 4</a>
-          <a href="#game5" class="game-tab active">Game 5</a>
-        </div>
-
-        <!-- Match Header -->
-        <div class="match-header">
-          <div class="match-header-content">
-            <div class="match-status-badge">🏆 Grand Finals</div>
-            <div class="teams-versus">
-              <div class="team-side">
-                <div class="team-logo-large">
-                  <img src="https://ggscore.com/media/logo/t72899.png?447" alt="Xtreme-Gaming">
-                </div>
-                <div class="team-name">Xtreme-Gaming</div>
-              </div>
-              <div class="vs-large">VS</div>
-              <div class="team-side">
-                <div class="team-logo-large">
-                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
-                </div>
-                <div class="team-name">Team Falcon</div>
-              </div>
-            </div>
-            <div class="match-type">Finals</div>
-          </div>
-        </div>
-
-        <!-- Xtreme Gaming Hero Picks -->
-        <div class="hero-picks-section">
-          <div class="team-picks dire">
-            <div class="team-header">
-              <div class="team-name-picks">Xtreme Gaming</div>
-            </div>
-            <div class="heroes-grid">
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/earthshaker.png" alt="Earth Shaker">
-                </div>
-                <div class="hero-name">EARTH SHAKER</div>
-                <div class="player-name">Xxs</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/shadow_demon.png" alt="Shadow Demon">
-                </div>
-                <div class="hero-name">SHADOW DEMON</div>
-                <div class="player-name">Xinq</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://game-tournaments.com/media/game/hero/582/_256/11.png" alt="Shadow Fiend">
-                </div>
-                <div class="hero-name">SHADOW FIEND</div>
-                <div class="player-name">Xm</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/ursa.png" alt="Ursa">
-                </div>
-                <div class="hero-name">URSA</div>
-                <div class="player-name">Xnova</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/juggernaut.png" alt="Juggernaut">
-                </div>
-                <div class="hero-name">JUGGERNAUT</div>
-                <div class="player-name">Ame</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Team Falcons Hero Picks -->
-          <div class="team-picks radiant">
-            <div class="team-header">
-              <div class="team-name-picks">Team Falcons</div>
-            </div>
-            <div class="heroes-grid">
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/naga_siren.png" alt="Naga Siren">
-                </div>
-                <div class="hero-name">NAGA SIREN</div>
-                <div class="player-name">Sneyking</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/snapfire.png" alt="Snapfire">
-                </div>
-                <div class="hero-name">SNAPFIRE</div>
-                <div class="player-name">Malr1ne</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/disruptor.png" alt="Disruptor">
-                </div>
-                <div class="hero-name">DISRUPTOR</div>
-                <div class="player-name">Sneyking</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/medusa.png" alt="Medusa">
-                </div>
-                <div class="hero-name">MEDUSA</div>
-                <div class="player-name">skiter</div>
-              </div>
-              <div class="hero-card">
-                <div class="hero-image">
-                  <img src="https://game-tournaments.com/media/game/hero/582/_256/97.png" alt="Magnus">
-                </div>
-                <div class="hero-name">MAGNUS</div>
-                <div class="player-name">ATF</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Video Section -->
-        <div class="video-section">
-          <a href="https://www.youtube.com/watch?v=cHvTjBIX53c" class="video-link" target="_blank">
-            [EN] FLCN vs XG - Game 5 - TI 2025 Grand Finals - Full Match VOD
-          </a>
-        </div>
-      </div>
-
-      <!-- Playoff List View -->
-      <div id="playoff" class="playoff-list-view">
-        <div class="playoff-section">
-          <h1 class="playoff-title">Playoff</h1>
-          
-          <div class="playoff-games">
-            <!-- Game 5 -->
-            <a href="#game5" class="game-card">
-              <div class="game-teams-logos">
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/t72899.png?447" alt="Xtreme-Gaming">
-                </div>
-                <div class="vs-text">VS</div>
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
-                </div>
-              </div>
-              <div class="game-info">
-                <div class="game-title">TI 2025 Playoff Grand Final- Game 5</div>
-                <div class="game-status">Completed</div>
-              </div>
-            </a>
-
-            <!-- Game 4 -->
-            <a href="#game4" class="game-card">
-              <div class="game-teams-logos">
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/t72899.png?447" alt="Xtreme-Gaming">
-                </div>
-                <div class="vs-text">VS</div>
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
-                </div>
-              </div>
-              <div class="game-info">
-                <div class="game-title">TI 2025 Playoff Grand Final- Game 4</div>
-                <div class="game-status">Completed</div>
-              </div>
-            </a>
-
-            <!-- Game 3 -->
-            <a href="#game3" class="game-card">
-              <div class="game-teams-logos">
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/t72899.png?447" alt="Xtreme-Gaming">
-                </div>
-                <div class="vs-text">VS</div>
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
-                </div>
-              </div>
-              <div class="game-info">
-                <div class="game-title">TI 2025 Playoff Grand Final- Game 3</div>
-                <div class="game-status">Completed</div>
-              </div>
-            </a>
-
-            <!-- Game 2 -->
-            <a href="#game2" class="game-card">
-              <div class="game-teams-logos">
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/t72899.png?447" alt="Xtreme-Gaming">
-                </div>
-                <div class="vs-text">VS</div>
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
-                </div>
-              </div>
-              <div class="game-info">
-                <div class="game-title">TI 2025 Playoff Grand Final- Game 2</div>
-                <div class="game-status">Completed</div>
-              </div>
-            </a>
-
-            <!-- Game 1 -->
-            <a href="#game1" class="game-card">
-              <div class="game-teams-logos">
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/t72899.png?447" alt="xtreme-Gaming">
-                </div>
-                <div class="vs-text">VS</div>
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
-                </div>
-              </div>
-              <div class="game-info">
-                <div class="game-title">TI 2025 Playoff Grand Final- Game 1</div>
-                <div class="game-status">Completed</div>
-              </div>
-            </a>
-
-            <!-- Upper Semi Game 3 -->
-            <a href="#uppersemi3" class="game-card">
-              <div class="game-teams-logos">
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/_60/t101027.png?840" alt="ParaVision">
-                </div>
-                <div class="vs-text">VS</div>
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
-                </div>
-              </div>
-              <div class="game-info">
-                <div class="game-title">TI 2025 Playoff Upper Semi- Game 3</div>
-                <div class="game-status">Completed</div>
-              </div>
-            </a>
-
-            <!-- Upper Semi Game 2 -->
-            <a href="#uppersemi2" class="game-card">
-              <div class="game-teams-logos">
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/_60/t101027.png?840" alt="ParaVision">
-                </div>
-                <div class="vs-text">VS</div>
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
-                </div>
-              </div>
-              <div class="game-info">
-                <div class="game-title">TI 2025 Playoff Upper Semi- Game 2</div>
-                <div class="game-status">Completed</div>
-              </div>
-            </a>
-
-            <!-- Upper Semi Game 1 -->
-            <a href="#uppersemi1" class="game-card">
-              <div class="game-teams-logos">
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/_60/t101027.png?840" alt="ParaVision">
-                </div>
-                <div class="vs-text">VS</div>
-                <div class="team-logo-small">
-                  <img src="https://ggscore.com/media/logo/t97509.png?650" alt="Team Falcon">
-                </div>
-              </div>
-              <div class="game-info">
-                <div class="game-title">TI 2025 Playoff Upper Semi- Game 1</div>
-                <div class="game-status">Completed</div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Footer -->
-    <div class="footer-text">
-      <div class="footer-logo">CS</div> © 2025 Champion Showdown Esports
-    </div>
-  </div>
 </body>
 </html>
