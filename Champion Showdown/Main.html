@@ -7,7 +7,366 @@
 
   <!-- Google Font for Logo -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
 
+  <div class="container">
+
+    <!-- ===== HEADER SECTION ===== -->
+    <header class="hero-header">
+      <div class="header-top">
+        <div class="header-left">
+          <div class="text-logo">CS</div>
+          <img src="https://i.pinimg.com/1200x/d0/de/5d/d0de5ddddd3e7c704511c912f1a60a63.jpg" alt="Dota 2 Logo" class="dota2-logo">
+        </div>
+
+        <nav class="top-nav">
+          <a href="Main.html">Home</a>
+          <a href="Match.html">Match</a>
+          <a href="New.html">News</a>
+          <a href="teams.html">Teams</a>
+          <a href="Players.html">Players</a>
+          <a href="watch.html">Watch/Vod</a>
+        </nav>
+
+        <div class="header-right">
+          <button class="search-icon-btn" onclick="openSearchModal()">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+          </button>
+
+          <div class="auth-buttons">
+            <button class="btn-auth btn-login" onclick="openLoginModal()">Log In</button>
+            <button class="btn-auth btn-signup" onclick="openSignupModal()">Sign Up</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="welcome-video-container">
+        <video class="hero-video" autoplay muted loop playsinline preload="auto">
+          <source src="https://cdn.steamstatic.com/apps/dota2/videos/dota_react/homepage/dota_montage_webm.webm" type="video/webm">
+          <source src="https://cdn.steamstatic.com/apps/dota2/videos/dota_react/homepage/dota_montage_02.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <div class="welcome-text-overlay">
+          <h1>Welcome To Champion Showdown</h1>
+          <p>Your home for Highlight esports matches, team stats, and exciting Dota 2 content.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="content-wrapper">
+      <aside class="sidebar">
+        <div class="sidebar-item active">
+          BLAST Slam#4
+        </div>
+        <div class="sidebar-item">
+          TI 2025
+        </div>
+      </aside>
+
+      <section class="main-content">
+        <div class="video-container">
+          <iframe 
+            src="https://www.youtube.com/embed/xhfs_1aMdMQ"
+            title="YouTube video player" 
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+      </section>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- ===== BOTTOM SECTION ===== -->
+    <section class="bottom-section">
+      <p>
+        Stream and video, teams and players, statistics and analytics<br>
+        On Esports Champion Showdown you can find all Dota 2 matches, watch streams and videos, look for 
+        detailed statistics on the teams, players and games. Follow Esports with Esports Champion Showdown
+      </p>
+
+      <div class="footer-text">
+        <div class="footer-logo">CS</div> &copy; 2025 Champion Showdown Esports
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Search Modal -->
+  <div id="searchModal" class="search-modal">
+    <div class="search-modal-content">
+      <input type="text" class="search-input-large" placeholder="Search..." id="searchInput" autofocus>
+      <button class="search-close" onclick="closeSearchModal()">&times;</button>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeLoginModal()">&times;</button>
+      <h2 class="modal-title">Log In</h2>
+      
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="Enter your email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password" required>
+        </div>
+        
+        <button type="submit" class="btn-submit">Log In</button>
+      </form>
+      
+      <div class="modal-footer">
+        Don't have an account? <a onclick="switchToSignup()">Sign Up</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div id="signupModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeSignupModal()">&times;</button>
+      <h2 class="modal-title">Sign Up</h2>
+      
+      <form onsubmit="handleSignup(event)">
+        <div class="form-group">
+          <label for="signupUsername">Username</label>
+          <input type="text" id="signupUsername" placeholder="Choose a username" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" placeholder="Enter your email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" placeholder="Create a password" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="signupConfirmPassword">Confirm Password</label>
+          <input type="password" id="signupConfirmPassword" placeholder="Confirm your password" required>
+        </div>
+        
+        <button type="submit" class="btn-submit">Sign Up</button>
+      </form>
+      
+      <div class="modal-footer">
+        Already have an account? <a onclick="switchToLogin()">Log In</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // Video switching functionality
+    const videoList = [
+      "https://www.youtube.com/embed/xhfs_1aMdMQ", // BLAST Slam IV
+      "https://www.youtube.com/embed/ZpZtFBeFzl8"  // TI 2025
+    ];
+
+    const sidebarItems = document.querySelectorAll(".sidebar-item");
+    const iframe = document.querySelector(".video-container iframe");
+    
+    sidebarItems.forEach((item, index) => {
+      item.addEventListener("click", () => {
+        sidebarItems.forEach(i => i.classList.remove("active"));
+        item.classList.add("active");
+        iframe.src = videoList[index];
+      });
+    });
+
+    // Search Modal
+    function openSearchModal() {
+      document.getElementById('searchModal').classList.add('active');
+      document.getElementById('searchInput').focus();
+    }
+
+    function closeSearchModal() {
+      document.getElementById('searchModal').classList.remove('active');
+      document.getElementById('searchInput').value = '';
+    }
+
+    // User Authentication System
+    let currentUser = null;
+
+    // Check if user is logged in on page load
+    window.addEventListener('DOMContentLoaded', function() {
+      const savedUser = localStorage.getItem('currentUser');
+      if (savedUser) {
+        currentUser = JSON.parse(savedUser);
+        updateUIForLoggedInUser();
+      }
+    });
+
+    function updateUIForLoggedInUser() {
+      const authButtons = document.querySelector('.auth-buttons');
+      authButtons.innerHTML = `
+        <span style="color: var(--color-text-light); margin-right: 10px;">
+          Welcome, ${currentUser.username}!
+        </span>
+        <button class="btn-auth btn-login" onclick="handleLogout()">Log Out</button>
+      `;
+    }
+
+    function handleLogout() {
+      if (confirm('Are you sure you want to log out?')) {
+        currentUser = null;
+        localStorage.removeItem('currentUser');
+        location.reload();
+      }
+    }
+
+    // Login Modal
+    function openLoginModal() {
+      document.getElementById('loginModal').classList.add('active');
+    }
+
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.remove('active');
+      document.getElementById('loginEmail').value = '';
+      document.getElementById('loginPassword').value = '';
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      // Get registered users from localStorage
+      const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+      
+      // Find user with matching email
+      const user = users.find(u => u.email === email);
+      
+      if (!user) {
+        alert('No account found with this email. Please sign up first.');
+        return;
+      }
+      
+      if (user.password !== password) {
+        alert('Incorrect password. Please try again.');
+        return;
+      }
+      
+      // Login successful
+      currentUser = {
+        username: user.username,
+        email: user.email
+      };
+      
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      
+      alert(`Welcome back, ${user.username}!`);
+      closeLoginModal();
+      updateUIForLoggedInUser();
+    }
+
+    // Signup Modal
+    function openSignupModal() {
+      document.getElementById('signupModal').classList.add('active');
+    }
+
+    function closeSignupModal() {
+      document.getElementById('signupModal').classList.remove('active');
+      document.getElementById('signupUsername').value = '';
+      document.getElementById('signupEmail').value = '';
+      document.getElementById('signupPassword').value = '';
+      document.getElementById('signupConfirmPassword').value = '';
+    }
+
+    function handleSignup(event) {
+      event.preventDefault();
+      const username = document.getElementById('signupUsername').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+      const confirmPassword = document.getElementById('signupConfirmPassword').value;
+      
+      // Validation
+      if (username.length < 3) {
+        alert('Username must be at least 3 characters long.');
+        return;
+      }
+      
+      if (password.length < 6) {
+        alert('Password must be at least 6 characters long.');
+        return;
+      }
+      
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+      }
+      
+      // Check if email already exists
+      const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+      const existingUser = users.find(u => u.email === email);
+      
+      if (existingUser) {
+        alert('An account with this email already exists. Please log in.');
+        return;
+      }
+      
+      // Create new user
+      const newUser = {
+        username: username,
+        email: email,
+        password: password,
+        createdAt: new Date().toISOString()
+      };
+      
+      users.push(newUser);
+      localStorage.setItem('registeredUsers', JSON.stringify(users));
+      
+      // Auto-login after signup
+      currentUser = {
+        username: newUser.username,
+        email: newUser.email
+      };
+      
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      
+      alert(`Account created successfully! Welcome, ${username}!`);
+      closeSignupModal();
+      updateUIForLoggedInUser();
+    }
+
+    // Switch between modals
+    function switchToSignup() {
+      closeLoginModal();
+      openSignupModal();
+    }
+
+    function switchToLogin() {
+      closeSignupModal();
+      openLoginModal();
+    }
+
+    // Close modals when clicking outside
+    document.getElementById('searchModal').addEventListener('click', function(e) {
+      if (e.target === this) closeSearchModal();
+    });
+
+    document.getElementById('loginModal').addEventListener('click', function(e) {
+      if (e.target === this) closeLoginModal();
+    });
+
+    document.getElementById('signupModal').addEventListener('click', function(e) {
+      if (e.target === this) closeSignupModal();
+    });
+  </script>
+
+  <!-- ===== CSS STYLES (Moved to Bottom) ===== -->
   <style>
     /* ===== VARIABLES ===== */
     :root {
@@ -517,362 +876,5 @@
       .btn-auth { padding: 6px 14px; font-size: 12px; }
     }
   </style>
-</head>
-<body>
-
-  <div class="container">
-
-    <!-- ===== HEADER SECTION ===== -->
-    <header class="hero-header">
-      <div class="header-top">
-        <div class="header-left">
-          <div class="text-logo">CS</div>
-          <img src="https://i.pinimg.com/1200x/d0/de/5d/d0de5ddddd3e7c704511c912f1a60a63.jpg" alt="Dota 2 Logo" class="dota2-logo">
-        </div>
-
-        <nav class="top-nav">
-          <a href="Main.html">Home</a>
-          <a href="Match.html">Match</a>
-          <a href="New.html">News</a>
-          <a href="teams.html">Teams</a>
-          <a href="Players.html">Players</a>
-          <a href="watch.html">Watch/Vod</a>
-        </nav>
-
-        <div class="header-right">
-          <button class="search-icon-btn" onclick="openSearchModal()">
-            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-            </svg>
-          </button>
-
-          <div class="auth-buttons">
-            <button class="btn-auth btn-login" onclick="openLoginModal()">Log In</button>
-            <button class="btn-auth btn-signup" onclick="openSignupModal()">Sign Up</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="welcome-video-container">
-        <video class="hero-video" autoplay muted loop playsinline preload="auto">
-          <source src="https://cdn.steamstatic.com/apps/dota2/videos/dota_react/homepage/dota_montage_webm.webm" type="video/webm">
-          <source src="https://cdn.steamstatic.com/apps/dota2/videos/dota_react/homepage/dota_montage_02.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-
-        <div class="welcome-text-overlay">
-          <h1>Welcome To Champion Showdown</h1>
-          <p>Your home for Highlight esports matches, team stats, and exciting Dota 2 content.</p>
-        </div>
-      </div>
-    </header>
-
-    <!-- ===== MAIN CONTENT ===== -->
-    <div class="content-wrapper">
-      <aside class="sidebar">
-        <div class="sidebar-item active">
-          BLAST Slam#4
-        </div>
-        <div class="sidebar-item">
-          TI 2025
-        </div>
-      </aside>
-
-      <section class="main-content">
-        <div class="video-container">
-          <iframe 
-            src="https://www.youtube.com/embed/xhfs_1aMdMQ"
-            title="YouTube video player" 
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
-        </div>
-      </section>
-    </div>
-
-    <hr class="divider" />
-
-    <!-- ===== BOTTOM SECTION ===== -->
-    <section class="bottom-section">
-      <p>
-        Stream and video, teams and players, statistics and analytics<br>
-        On Esports Champion Showdown you can find all Dota 2 matches, watch streams and videos, look for 
-        detailed statistics on the teams, players and games. Follow Esports with Esports Champion Showdown
-      </p>
-
-      <div class="footer-text">
-        <div class="footer-logo">CS</div> &copy; 2025 Champion Showdown Esports
-      </div>
-    </section>
-
-  </div>
-
-  <!-- Search Modal -->
-  <div id="searchModal" class="search-modal">
-    <div class="search-modal-content">
-      <input type="text" class="search-input-large" placeholder="Search..." id="searchInput" autofocus>
-      <button class="search-close" onclick="closeSearchModal()">&times;</button>
-    </div>
-  </div>
-
-  <!-- Login Modal -->
-  <div id="loginModal" class="modal-overlay">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeLoginModal()">&times;</button>
-      <h2 class="modal-title">Log In</h2>
-      
-      <form onsubmit="handleLogin(event)">
-        <div class="form-group">
-          <label for="loginEmail">Email</label>
-          <input type="email" id="loginEmail" placeholder="Enter your email" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="loginPassword">Password</label>
-          <input type="password" id="loginPassword" placeholder="Enter your password" required>
-        </div>
-        
-        <button type="submit" class="btn-submit">Log In</button>
-      </form>
-      
-      <div class="modal-footer">
-        Don't have an account? <a onclick="switchToSignup()">Sign Up</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Signup Modal -->
-  <div id="signupModal" class="modal-overlay">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeSignupModal()">&times;</button>
-      <h2 class="modal-title">Sign Up</h2>
-      
-      <form onsubmit="handleSignup(event)">
-        <div class="form-group">
-          <label for="signupUsername">Username</label>
-          <input type="text" id="signupUsername" placeholder="Choose a username" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="signupEmail">Email</label>
-          <input type="email" id="signupEmail" placeholder="Enter your email" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="signupPassword">Password</label>
-          <input type="password" id="signupPassword" placeholder="Create a password" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="signupConfirmPassword">Confirm Password</label>
-          <input type="password" id="signupConfirmPassword" placeholder="Confirm your password" required>
-        </div>
-        
-        <button type="submit" class="btn-submit">Sign Up</button>
-      </form>
-      
-      <div class="modal-footer">
-        Already have an account? <a onclick="switchToLogin()">Log In</a>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Video switching functionality
-    const videoList = [
-      "https://www.youtube.com/embed/xhfs_1aMdMQ", // BLAST Slam IV
-      "https://www.youtube.com/embed/ZpZtFBeFzl8"  // TI 2025
-    ];
-
-    const sidebarItems = document.querySelectorAll(".sidebar-item");
-    const iframe = document.querySelector(".video-container iframe");
-    
-    sidebarItems.forEach((item, index) => {
-      item.addEventListener("click", () => {
-        sidebarItems.forEach(i => i.classList.remove("active"));
-        item.classList.add("active");
-        iframe.src = videoList[index];
-      });
-    });
-
-    // Search Modal
-    function openSearchModal() {
-      document.getElementById('searchModal').classList.add('active');
-      document.getElementById('searchInput').focus();
-    }
-
-    function closeSearchModal() {
-      document.getElementById('searchModal').classList.remove('active');
-      document.getElementById('searchInput').value = '';
-    }
-
-    // User Authentication System
-    let currentUser = null;
-
-    // Check if user is logged in on page load
-    window.addEventListener('DOMContentLoaded', function() {
-      const savedUser = localStorage.getItem('currentUser');
-      if (savedUser) {
-        currentUser = JSON.parse(savedUser);
-        updateUIForLoggedInUser();
-      }
-    });
-
-    function updateUIForLoggedInUser() {
-      const authButtons = document.querySelector('.auth-buttons');
-      authButtons.innerHTML = `
-        <span style="color: var(--color-text-light); margin-right: 10px;">
-          Welcome, ${currentUser.username}!
-        </span>
-        <button class="btn-auth btn-login" onclick="handleLogout()">Log Out</button>
-      `;
-    }
-
-    function handleLogout() {
-      if (confirm('Are you sure you want to log out?')) {
-        currentUser = null;
-        localStorage.removeItem('currentUser');
-        location.reload();
-      }
-    }
-
-    // Login Modal
-    function openLoginModal() {
-      document.getElementById('loginModal').classList.add('active');
-    }
-
-    function closeLoginModal() {
-      document.getElementById('loginModal').classList.remove('active');
-      document.getElementById('loginEmail').value = '';
-      document.getElementById('loginPassword').value = '';
-    }
-
-    function handleLogin(event) {
-      event.preventDefault();
-      const email = document.getElementById('loginEmail').value;
-      const password = document.getElementById('loginPassword').value;
-      
-      // Get registered users from localStorage
-      const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
-      
-      // Find user with matching email
-      const user = users.find(u => u.email === email);
-      
-      if (!user) {
-        alert('No account found with this email. Please sign up first.');
-        return;
-      }
-      
-      if (user.password !== password) {
-        alert('Incorrect password. Please try again.');
-        return;
-      }
-      
-      // Login successful
-      currentUser = {
-        username: user.username,
-        email: user.email
-      };
-      
-      localStorage.setItem('currentUser', JSON.stringify(currentUser));
-      
-      alert(`Welcome back, ${user.username}!`);
-      closeLoginModal();
-      updateUIForLoggedInUser();
-    }
-
-    // Signup Modal
-    function openSignupModal() {
-      document.getElementById('signupModal').classList.add('active');
-    }
-
-    function closeSignupModal() {
-      document.getElementById('signupModal').classList.remove('active');
-      document.getElementById('signupUsername').value = '';
-      document.getElementById('signupEmail').value = '';
-      document.getElementById('signupPassword').value = '';
-      document.getElementById('signupConfirmPassword').value = '';
-    }
-
-    function handleSignup(event) {
-      event.preventDefault();
-      const username = document.getElementById('signupUsername').value;
-      const email = document.getElementById('signupEmail').value;
-      const password = document.getElementById('signupPassword').value;
-      const confirmPassword = document.getElementById('signupConfirmPassword').value;
-      
-      // Validation
-      if (username.length < 3) {
-        alert('Username must be at least 3 characters long.');
-        return;
-      }
-      
-      if (password.length < 6) {
-        alert('Password must be at least 6 characters long.');
-        return;
-      }
-      
-      if (password !== confirmPassword) {
-        alert('Passwords do not match!');
-        return;
-      }
-      
-      // Check if email already exists
-      const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
-      const existingUser = users.find(u => u.email === email);
-      
-      if (existingUser) {
-        alert('An account with this email already exists. Please log in.');
-        return;
-      }
-      
-      // Create new user
-      const newUser = {
-        username: username,
-        email: email,
-        password: password,
-        createdAt: new Date().toISOString()
-      };
-      
-      users.push(newUser);
-      localStorage.setItem('registeredUsers', JSON.stringify(users));
-      
-      // Auto-login after signup
-      currentUser = {
-        username: newUser.username,
-        email: newUser.email
-      };
-      
-      localStorage.setItem('currentUser', JSON.stringify(currentUser));
-      
-      alert(`Account created successfully! Welcome, ${username}!`);
-      closeSignupModal();
-      updateUIForLoggedInUser();
-    }
-
-    // Switch between modals
-    function switchToSignup() {
-      closeLoginModal();
-      openSignupModal();
-    }
-
-    function switchToLogin() {
-      closeSignupModal();
-      openLoginModal();
-    }
-
-    // Close modals when clicking outside
-    document.getElementById('searchModal').addEventListener('click', function(e) {
-      if (e.target === this) closeSearchModal();
-    });
-
-    document.getElementById('loginModal').addEventListener('click', function(e) {
-      if (e.target === this) closeLoginModal();
-    });
-
-    document.getElementById('signupModal').addEventListener('click', function(e) {
-      if (e.target === this) closeSignupModal();
-    });
-  </script>
 </body>
 </html>
